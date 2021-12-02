@@ -108,7 +108,7 @@ public class Manager {
         }
         option=sc.nextInt();
         System.out.println("Insert 0 to finish buying or 1 to start or continue \n");
-        while()
+       // while()
         switch(option){
             case 1:
 
@@ -127,8 +127,8 @@ public class Manager {
                 }
                 break;
             case 0:
-                return new Sales(p,saleprice(),b,d);
-
+                //return new Sales(p,saleprice(),b,d);
+                return new Sales(null,null,null);
 
         }
 
