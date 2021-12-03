@@ -43,9 +43,10 @@ public class Manager {
         m.c.add(cli);
 
         Client b = m.login();
-        Sales s1 = m.buy(b, d);
-        b.setS(s1);
-        m.consultSales(b);
+        System.out.println(b);
+        //Sales s1 = m.buy(b, d);
+        b.setS(sal);
+       System.out.println(b.getName());
 
 
     }
@@ -87,6 +88,7 @@ public class Manager {
             } else if (!((i.getEmail()).equals(em)) || c.isEmpty()) {
                 System.out.println("Email not found!\n");
                 login();
+
             }
         }
         return null;
@@ -191,15 +193,16 @@ public class Manager {
         Sales s = new Sales(saleprice(d), b, d);
         System.out.println("Your purchase:\n");
         System.out.println(s);
-        return new Sales(saleprice(d), b, d);
+        return s;
 
 
     }
 
 
     public void consultSales(Client c) {
-        for (Sales s : c.getS()) {
-            System.out.println(s);
+        ArrayList<Sales> m=c.getS();
+        for (Sales i : m) {
+            System.out.println(i);
         }
     }
 
