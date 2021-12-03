@@ -37,8 +37,11 @@ public class Food extends Product {
         return "Food{" +
                 "nCalorie=" + nCalorie +
                 ", fatPercent=" + fatPercent +
-                '}';
+                "} " + super.toString();
     }
+
+    @Override
+
     public int costextra(){
         return 0;
     }

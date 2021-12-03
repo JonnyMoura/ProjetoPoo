@@ -62,6 +62,17 @@ public abstract class Product {
         this.prom = prom;
     }
 
+
     public abstract int costextra();
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", unitPrice=" + unitPrice +
+                ", stock=" + stock +
+                ", prom=" + prom +
+                '}';
+    }
 }

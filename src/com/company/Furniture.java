@@ -31,13 +31,16 @@ public class Furniture extends Product {
         this.dim = dim;
     }
 
-    @Override
     public String toString() {
         return "Furniture{" +
                 "weight=" + weight +
                 ", dim=" + dim +
-                '}';
+                "} " + super.toString();
     }
+
+    @Override
+
+
     public int costextra(){
         if(weight>=15)return 10;
         else return 0;

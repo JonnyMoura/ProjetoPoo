@@ -25,8 +25,11 @@ public class Cleaning extends Product {
     public String toString() {
         return "Cleaning{" +
                 "tox=" + tox +
-                '}';
+                "} " + super.toString();
     }
+
+    @Override
+
 
     public int costextra(){
         return 0;
