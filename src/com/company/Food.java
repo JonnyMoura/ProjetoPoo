@@ -16,6 +16,13 @@ public class Food extends Product {
         this.fatPercent = fatPercent;
     }
 
+    public Food(Food another){
+        super(another);
+        this.nCalorie = another.nCalorie;
+        this.fatPercent = another.fatPercent;
+
+    }
+
     public double getnCalorie() {
         return nCalorie;
     }
@@ -45,4 +52,14 @@ public class Food extends Product {
     public int costextra(){
         return 0;
     }
+
+    @Override
+
+    public Product copy(){
+        return new Food(this);
+    }
+
+
 }
+
+

@@ -1,6 +1,6 @@
 package com.company;
 
-public abstract class Product {
+public abstract class Product  {
     private int id;
     private String name;
     private double unitPrice;
@@ -12,6 +12,12 @@ public abstract class Product {
         this.name = name;
         this.unitPrice = unitPrice;
         this.stock = stock;
+    }
+    public Product(Product another){
+        this.id = another.id;
+        this.name = another.name;
+        this.unitPrice = another.unitPrice;
+        this.stock = another.stock;
     }
 
     public Product(int id, String name, double unitPrice, int stock, Promotion prom) {
@@ -64,6 +70,7 @@ public abstract class Product {
 
 
     public abstract int costextra();
+    public abstract Product copy();
 
     @Override
     public String toString() {
@@ -75,4 +82,6 @@ public abstract class Product {
                 ", prom=" + prom +
                 '}';
     }
+
+
 }

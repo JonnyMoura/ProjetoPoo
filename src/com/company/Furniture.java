@@ -15,6 +15,14 @@ public class Furniture extends Product {
         this.dim = dim;
     }
 
+    public Furniture(Furniture another){
+        super(another);
+        this.weight = another.weight;
+        this.dim = another.dim;
+
+
+    }
+
     public double getWeight() {
         return weight;
     }
@@ -44,5 +52,11 @@ public class Furniture extends Product {
     public int costextra(){
         if(weight>=15)return 10;
         else return 0;
+    }
+
+    @Override
+    public Product copy(){
+        return new Furniture(this);
+
     }
 }

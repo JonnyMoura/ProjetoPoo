@@ -145,32 +145,38 @@ public class Manager {
             Scanner nc = new Scanner(System.in);
             String pr = nc.nextLine();
             System.out.println("How many units?");
-                Scanner mc=new Scanner(System.in);
-                while (!mc.hasNextInt()) {//checks if the input is an integer
-                    System.out.println("Invalid data\nInsert number");
-                    mc.next();
-                }
-            int units=mc.nextInt();
+            Scanner mc = new Scanner(System.in);
+            while (!mc.hasNextInt()) {//checks if the input is an integer
+                System.out.println("Invalid data\nInsert number");
+                mc.next();
+            }
+            int units = mc.nextInt();
             int aux = 0;
             for (Product i : p) {
                 if ((i.getName().equals(pr)) && i.getStock() > 0) {
                     aux += 1;
                     System.out.println("Succesfully added to the cart! \n");
                     i.setStock(i.getStock() - units);
+                    Product cpy = i.copy();
+                    cpy.setStock(0);
+                    prod.add(cpy);
 
-                    prod.add(i);
 
                 }
             }
-            if(aux==1){
-            for (Product j : prod) {
-                if (pr.equals(j.getName())) {
-                    j.setStock(units);
+            if (aux == 1) {
+                for (Product j : prod) {
+                    if (pr.equals(j.getName())) {
+                        j.setStock(j.getStock()+units);
+                    }
+                }
             }
 
-            }}
-            if (aux == 0) {
+
+            else {
                 System.out.println("Product not available or out of stock!\n");
+
+
             }
             System.out.println("Your cart until this moment:\n");
             for (Product i : prod) {
@@ -195,9 +201,10 @@ public class Manager {
 
 
     public void consultSales(Client c) {
-        for(Sales i:c.getS()){
+        for (Sales i : c.getS()) {
             System.out.println(i);
-    }}
+        }
+    }
 
 
     private double dimensionCalc() {
