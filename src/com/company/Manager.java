@@ -19,7 +19,7 @@ public class Manager {
         Furniture f = new Furniture(123, "cadeira", 1, 10, 15, 10);
         Cleaning pq = new Cleaning(1234, "limpador", 1, 12, pra, 8);
         Manager m = new Manager();
-        Client cli = new Client("luisao", "cu de judas", "luisao@gmail.com", d, true);
+        Client cli = new Client("luisao", "cu de judas", "l@g.c", d, true);
         m.p.add(p);
         m.p.add(pq);
         m.p.add(f);
@@ -44,6 +44,8 @@ public class Manager {
 
         Client b = m.login();
         Sales s1 = m.buy(b, d);
+        b.setS(s1);
+        m.consultSales(b);
 
 
     }
