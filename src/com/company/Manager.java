@@ -23,8 +23,6 @@ public class Manager {
         m.p.add(p);
         m.p.add(pq);
         m.p.add(f);
-        //m.p.add(p);
-        //m.p.add(pq);
         Sales s = new Sales(12, cli, d2);
         s.setP(f);
         s.setP(p);
@@ -43,8 +41,12 @@ public class Manager {
 
         System.out.println(s);
         m.c.add(cli);
+
         Client b = m.login();
-        m.buy(b, d);
+        b.setS(m.buy(b, d));
+        b.setS(s);
+        m.consultSales(b);
+
 
 
     }
@@ -201,7 +203,8 @@ public class Manager {
 
 
     public void consultSales(Client c) {
-        for (Sales i : c.getS()) {
+        ArrayList <Sales> s= c.getS();
+        for (Sales i : s) {
             System.out.println(i);
         }
     }
