@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Manager {
     private ArrayList<Product> p;
     private ArrayList<Client> c;
-    private ArrayList<Sales> s;
+
 
     public static void main(String[] args) {
         Data d = new Data(10, 12, 2020);
@@ -23,28 +23,28 @@ public class Manager {
         m.p.add(p);
         m.p.add(pq);
         m.p.add(f);
-        Sales s = new Sales(12, cli, d2);
-        s.setP(f);
-        s.setP(p);
-        s.setP(p);
-        s.setP(p);
-        s.setP(p);
-        s.setP(pq);
-        s.setP(pq);
-        s.setP(pq);
-        s.setP(pq);
-        s.setP(pq);
-        s.setP(pq);
-        s.setP(pq);
-        s.setP(pq);
-        s.setP(pq);
+        Sales sal = new Sales(12, cli, d2);
+        sal.setP(f);
+        sal.setP(p);
+        sal.setP(p);
+        sal.setP(p);
+        sal.setP(p);
+        sal.setP(pq);
+        sal.setP(pq);
+        sal.setP(pq);
+        sal.setP(pq);
+        sal.setP(pq);
+        sal.setP(pq);
+        sal.setP(pq);
+        sal.setP(pq);
+        sal.setP(pq);
 
-        System.out.println(s);
+        System.out.println(sal);
         m.c.add(cli);
 
         Client b = m.login();
-        b.setS(m.buy(b, d));
-        b.setS(s);
+        Sales s1=m.buy(b, d);
+        b.setS(sal);
         m.consultSales(b);
 
 
@@ -54,7 +54,7 @@ public class Manager {
     public Manager() {
         p = new ArrayList<>();
         c = new ArrayList<>();
-        s = new ArrayList<>();
+
 
     }
 
@@ -74,13 +74,9 @@ public class Manager {
         this.c = c;
     }
 
-    public ArrayList<Sales> getS() {
-        return s;
-    }
 
-    public void setS(ArrayList<Sales> s) {
-        this.s = s;
-    }
+
+
 
     public Client login() {
         System.out.println("Insert email \n");
@@ -195,7 +191,7 @@ public class Manager {
         } while (option != -1);
         Sales s = new Sales(saleprice(d), b, d);
         System.out.println("Your purchase:\n");
-        System.out.println(s.toString());
+        System.out.println(s);
         return new Sales(saleprice(d), b, d);
 
 
@@ -203,9 +199,8 @@ public class Manager {
 
 
     public void consultSales(Client c) {
-        ArrayList <Sales> s= c.getS();
-        for (Sales i : s) {
-            System.out.println(i);
+        for (Sales s : c.getS()) {
+            System.out.println(s);
         }
     }
 
