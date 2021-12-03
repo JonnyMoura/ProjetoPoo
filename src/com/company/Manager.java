@@ -43,10 +43,7 @@ public class Manager {
         m.c.add(cli);
 
         Client b = m.login();
-        Sales s1=m.buy(b, d);
-        b.setS(sal);
-        m.consultSales(b);
-
+        Sales s1 = m.buy(b, d);
 
 
     }
@@ -73,9 +70,6 @@ public class Manager {
     public void setC(ArrayList<Client> c) {
         this.c = c;
     }
-
-
-
 
 
     public Client login() {
@@ -143,12 +137,18 @@ public class Manager {
             Scanner nc = new Scanner(System.in);
             String pr = nc.nextLine();
             System.out.println("How many units?");
+            int units = 0;
             Scanner mc = new Scanner(System.in);
-            while (!mc.hasNextInt()) {//checks if the input is an integer
-                System.out.println("Invalid data\nInsert number");
-                mc.next();
-            }
-            int units = mc.nextInt();
+            do {
+                while (!mc.hasNextInt()) {//checks if the input is an integer
+                    System.out.println("Invalid data\nInsert number");
+                    mc.next();
+                }
+                units = mc.nextInt();
+                if (units <= 0) {
+                    System.out.println("Enter a number >0");
+                }
+            } while (units <= 0);
             int aux = 0;
             for (Product i : p) {
                 if ((i.getName().equals(pr)) && i.getStock() > 0) {
@@ -165,13 +165,10 @@ public class Manager {
             if (aux == 1) {
                 for (Product j : prod) {
                     if (pr.equals(j.getName())) {
-                        j.setStock(j.getStock()+units);
+                        j.setStock(j.getStock() + units);
                     }
                 }
-            }
-
-
-            else {
+            } else {
                 System.out.println("Product not available or out of stock!\n");
 
 
@@ -205,7 +202,41 @@ public class Manager {
     }
 
 
-    private double dimensionCalc() {
-        return 0;
+    private double dimensionCalc(double height, double length, double width) {
+        return (height * length * width);
+    }
+
+    public void menu(Data d) {
+        Client b = login();
+        int n;
+
+        do {
+            System.out.println("Select an option");
+            System.out.println("1 -Make a purchase");
+            System.out.println("2 -View made purchases");
+            System.out.println("Any number-Exit");
+            Scanner sc = new Scanner(System.in);
+            while (!sc.hasNextInt()) {//checks if the input is an integer
+                System.out.println("Invalid data\nInsert number");
+                sc.next();
+            }
+            n = sc.nextInt();
+
+
+            switch (n) {
+                case 1 -> {
+                    buy(b, d);
+
+
+                }
+
+                case 2 -> {
+                    //consultSales(b)
+                }
+
+
+            }
+        } while (n == 1 || n == 2);
+        System.exit(0);
     }
 }
