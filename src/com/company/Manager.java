@@ -46,7 +46,7 @@ public class Manager {
         System.out.println(b);
         //Sales s1 = m.buy(b, d);
         b.setS(sal);
-       System.out.println(b.getName());
+        System.out.println(b.getName());
 
 
     }
@@ -85,13 +85,11 @@ public class Manager {
                 return i;
 
 
-            } else if (!((i.getEmail()).equals(em)) || c.isEmpty()) {
-                System.out.println("Email not found!\n");
-                login();
-
             }
+
         }
-        return null;
+        System.out.println("Email not found");
+        return login();
     }
 
 
@@ -200,7 +198,7 @@ public class Manager {
 
 
     public void consultSales(Client c) {
-        ArrayList<Sales> m=c.getS();
+        ArrayList<Sales> m = c.getS();
         for (Sales i : m) {
             System.out.println(i);
         }
