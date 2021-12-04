@@ -18,6 +18,7 @@ public abstract class Product  {
         this.name = another.name;
         this.unitPrice = another.unitPrice;
         this.stock = another.stock;
+        this.prom = another.prom;
     }
 
     public Product(int id, String name, double unitPrice, int stock, Promotion prom) {

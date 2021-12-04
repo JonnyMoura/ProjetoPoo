@@ -7,7 +7,7 @@ public class Client {
     private String email;
     private Data birthDate;
     private boolean frequentClient;
-    private ArrayList<Sales> s;
+    final private ArrayList<Sales> s;
 
     public Client(String name, String address, String email, Data birthDate, boolean frequentClient) {
         this.name = name;
@@ -74,7 +74,7 @@ public class Client {
                 ", email='" + email + '\'' +
                 ", birthDate=" + birthDate +
                 ", frequentClient=" + frequentClient +
-                ", s=" + s +
+                ", s=" +s+
                 '}';
     }
 }

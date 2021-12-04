@@ -7,9 +7,9 @@ public class Sales {
     private Client client;
     private Data saledate;
 
-    public Sales(double salePrice, Client client, Data saledate) {
+    public Sales( ArrayList<Product> p,double salePrice, Client client, Data saledate) {
         this.client = client;
-        p= new ArrayList<>();
+        this.p=p;
         this.salePrice=salePrice;
         this.saledate=saledate;
     }
@@ -67,7 +67,7 @@ public class Sales {
                 "p=" + p+ "\n"+
                 "salePrice -->"+salePrice+"\n"+
                 "transportcost -->"+ transportCost()+"\n"+
-                "client=" + client +"\n"+
+                "client=" + client.getName() +"\n"+
                 "saledate=" + saledate +"\n"+
                 '}';
     }

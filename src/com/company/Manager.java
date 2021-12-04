@@ -23,30 +23,15 @@ public class Manager {
         m.p.add(p);
         m.p.add(pq);
         m.p.add(f);
-        Sales sal = new Sales(12, cli, d2);
-        sal.setP(f);
-        sal.setP(p);
-        sal.setP(p);
-        sal.setP(p);
-        sal.setP(p);
-        sal.setP(pq);
-        sal.setP(pq);
-        sal.setP(pq);
-        sal.setP(pq);
-        sal.setP(pq);
-        sal.setP(pq);
-        sal.setP(pq);
-        sal.setP(pq);
-        sal.setP(pq);
 
-        System.out.println(sal);
+
         m.c.add(cli);
 
         Client b = m.login();
-        System.out.println(b);
-        //Sales s1 = m.buy(b, d);
-        b.setS(sal);
-        System.out.println(b.getName());
+        Sales s1 = m.buy(b, d2);
+        b.setS(s1);
+        //System.out.println(s1);
+        //m.consultSales(b);
 
 
     }
@@ -76,17 +61,14 @@ public class Manager {
 
 
     public Client login() {
-        System.out.println("Insert email \n");
+        System.out.print("Insert email :");
         Scanner sc = new Scanner(System.in);
         String em = sc.nextLine();
         for (Client i : c) {
             if ((i.getEmail()).equals(em)) {
                 System.out.println("Success!You have logged in\n");
                 return i;
-
-
             }
-
         }
         System.out.println("Email not found");
         return login();
@@ -103,26 +85,16 @@ public class Manager {
         }
     }
 
-    public double saleprice(Data d) {
+    public double saleprice(ArrayList<Product> products,Data d) {
         double salepriceaux = 0;
-        int auxi = 0;
-        ArrayList<Product> aux = new ArrayList<>(p);
-        for (Product prod : p) {
-            for (int i = 0; aux.size() > i; i++) {
-                if (prod.getId() == aux.get(i).getId()) {
-                    auxi++;
-                    aux.remove(i);
-                    i--;
-                }
-            }
+        for (Product prod : products) {
             if (prod.getProm() == null) {
-                salepriceaux += prod.getUnitPrice() * auxi;
+                salepriceaux += prod.getUnitPrice() * prod.getStock();
             } else {
                 if (!verifyData(d, prod.getProm().getStartDate()) && verifyData(d, prod.getProm().getFinalDate())) {
-                    salepriceaux += prod.getProm().calculaDesconto(prod.getUnitPrice(), auxi);
-                } else salepriceaux += prod.getUnitPrice() * auxi;
+                    salepriceaux += prod.getProm().calculaDesconto(prod.getUnitPrice(), prod.getStock());
+                } else salepriceaux += prod.getUnitPrice() * prod.getStock();
             }
-            auxi = 0;
         }
         return salepriceaux;
     }
@@ -133,7 +105,7 @@ public class Manager {
         do {
             System.out.println("Available products:\n");
             for (Product i : p) {
-                System.out.println(i.toString());
+                System.out.println(i);
             }
             System.out.println("Select the product you wish to buy");
             Scanner nc = new Scanner(System.in);
@@ -158,7 +130,7 @@ public class Manager {
                     System.out.println("Succesfully added to the cart! \n");
                     i.setStock(i.getStock() - units);
                     Product cpy = i.copy();
-                    cpy.setStock(0);
+                    cpy.setStock(units);
                     prod.add(cpy);
 
 
@@ -167,7 +139,7 @@ public class Manager {
             if (aux == 1) {
                 for (Product j : prod) {
                     if (pr.equals(j.getName())) {
-                        j.setStock(j.getStock() + units);
+                        j.setStock( units);
                     }
                 }
             } else {
@@ -188,7 +160,7 @@ public class Manager {
             option = sc.nextInt();
 
         } while (option != -1);
-        Sales s = new Sales(saleprice(d), b, d);
+        Sales s = new Sales(prod,saleprice(prod,d),b, d);
         System.out.println("Your purchase:\n");
         System.out.println(s);
         return s;
@@ -198,9 +170,8 @@ public class Manager {
 
 
     public void consultSales(Client c) {
-        ArrayList<Sales> m = c.getS();
-        for (Sales i : m) {
-            System.out.println(i);
+        for (Sales s : c.getS()) {
+            System.out.println(s);
         }
     }
 

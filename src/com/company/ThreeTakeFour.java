@@ -8,7 +8,7 @@ public class ThreeTakeFour extends Promotion {
 
     @Override
     public double calculaDesconto(double unitprice , int count) {
-        return unitprice*(count-count/4);
+        return unitprice * (double)(count-count/4);
     }
 
 
