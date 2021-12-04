@@ -1,5 +1,5 @@
 package com.company;
-
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -7,39 +7,22 @@ import java.util.Scanner;
 public class Manager {
     private ArrayList<Product> p;
     private ArrayList<Client> c;
-
+    private ArrayList<Promotion> pro;
 
     public static void main(String[] args) {
-        Data d = new Data(10, 12, 2020);
-        Data d1 = new Data(12, 12, 2020);
-        Data d2 = new Data(11, 12, 2020);
-        PayLess pro = new PayLess(d, d1);
-        ThreeTakeFour pra = new ThreeTakeFour(d, d1);
-        Food p = new Food(12345, "banana", 1, 12, pro, 12, 12);
-        Furniture f = new Furniture(123, "cadeira", 1, 10, 15, 10);
-        Cleaning pq = new Cleaning(1234, "limpador", 1, 12, pra, 8);
-        Manager m = new Manager();
-        Client cli = new Client("luisao", "cu de judas", "l@g.c", d, true);
-        m.p.add(p);
-        m.p.add(pq);
-        m.p.add(f);
-
-
-        m.c.add(cli);
-
-        Client b = m.login();
-        Sales s1 = m.buy(b, d2);
-        b.setS(s1);
-        //System.out.println(s1);
-        //m.consultSales(b);
-
+        Manager m= new Manager();
+        m.readFile("promotion.txt");
+        m.readFile("producs.txt");
+        for(Product p : m.p){
+            System.out.println(p);
+        }
 
     }
 
     public Manager() {
         p = new ArrayList<>();
         c = new ArrayList<>();
-
+        pro = new ArrayList<>();
 
     }
 
@@ -59,6 +42,84 @@ public class Manager {
         this.c = c;
     }
 
+    public void readFile(String file){
+        File f = new File(file);
+        if(f.exists() && f.isFile()) {
+            try{
+                FileReader fr= new FileReader(f);
+                BufferedReader br= new BufferedReader(fr);
+                String[] split;
+                String line;
+                while((line= br.readLine()) != null) {
+                    split=line.split(";");
+                    if(split[0].equals("Client")){
+                        String[] splitdata =split[4].split("/");
+                        Data d= new Data(Integer.parseInt(splitdata[0]),Integer.parseInt(splitdata[1]),Integer.parseInt(splitdata[2]));
+                        Client cl = new Client(split[1],split[2],split[3],d,Boolean.parseBoolean(split[5]));
+                        c.add(cl);
+                    }
+                    else if(split[0].equals("Promotion")){
+                        String[] splitdata ;
+                        splitdata=split[2].split("/");
+                        Data d1= new Data(Integer.parseInt(splitdata[0]),Integer.parseInt(splitdata[1]),Integer.parseInt(splitdata[2]));
+                        splitdata=split[3].split("/");
+                        Data d2= new Data(Integer.parseInt(splitdata[0]),Integer.parseInt(splitdata[1]),Integer.parseInt(splitdata[2]));
+                        if(split[1].equals("PayLess")){
+                            PayLess pl= new PayLess(d1,d2);
+                            pro.add(pl);
+                        }
+                        else{
+                            ThreeTakeFour ttf= new ThreeTakeFour(d1,d2);
+                            pro.add(ttf);
+                        }
+                    }
+                    else{
+                        if(split[1].equals("Food")){
+                            Food fd;
+                            if(split[6]!="") {
+                                fd = new Food(Integer.parseInt(split[2]), split[3], Double.parseDouble(split[4]), Integer.parseInt(split[5]),
+                                        pro.get(Integer.parseInt(split[6])), Double.parseDouble(split[7]), Double.parseDouble(split[8]));
+                            }
+                            else{
+                                fd = new Food(Integer.parseInt(split[2]), split[3], Double.parseDouble(split[4]), Integer.parseInt(split[5]),
+                                        Double.parseDouble(split[7]), Double.parseDouble(split[8]));
+                            }
+                            p.add(fd);
+                        }
+                        else if(split[1].equals("Cleaning")){
+                            Cleaning cl;
+                            if(split[6]!=""){
+                                cl = new Cleaning(Integer.parseInt(split[2]), split[3], Double.parseDouble(split[4]), Integer.parseInt(split[5]),
+                                        pro.get(Integer.parseInt(split[6])), Integer.parseInt(split[7]));
+                            }
+                            else{
+                                cl = new Cleaning(Integer.parseInt(split[2]), split[3], Double.parseDouble(split[4]), Integer.parseInt(split[5]),
+                                        Integer.parseInt(split[7]));
+                            }
+                            p.add(cl);
+                        }
+                        else{
+                            Furniture fur;
+                            if(split[6]!="") {
+                                fur = new Furniture(Integer.parseInt(split[2]), split[3], Double.parseDouble(split[4]), Integer.parseInt(split[5]),
+                                        pro.get(Integer.parseInt(split[6])), Double.parseDouble(split[7]), Double.parseDouble(split[8]));
+                            }
+                            else{
+                                fur = new Furniture(Integer.parseInt(split[2]), split[3], Double.parseDouble(split[4]), Integer.parseInt(split[5]),
+                                        Double.parseDouble(split[7]), Double.parseDouble(split[8]));
+                            }
+                            p.add(fur);
+                        }
+                    }
+                }
+                br.close();
+            } catch(FileNotFoundException ex) {
+                System.out.println("Erro a abrir ficheiro de texto.");
+            } catch( IOException ex ) {
+                System.out.println("Erro a ler ficheiro de texto.");}
+        } else{System.out.println("Ficheiro não existe.");
+        }
+    }
 
     public Client login() {
         System.out.print("Insert email :");

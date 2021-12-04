@@ -7,6 +7,10 @@ public class Cleaning extends Product {
         super(id, name, unitPrice, stock, prom);
         this.tox = tox;
     }
+    public Cleaning(int id, String name, double unitPrice, int stock, int tox) {
+        super(id, name, unitPrice, stock);
+        this.tox = tox;
+    }
 
     public Cleaning(Cleaning another){
         super(another);
