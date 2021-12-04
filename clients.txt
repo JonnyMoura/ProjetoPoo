@@ -1,0 +1,10 @@
+Client;luis;coimbra;luis2000@gmail.com;10/11/2000;false;
+Client;joao;canas de senhorim;joaomitra@gmail.com;11/9/2001;false;
+Client;nuno;viana do castelo;nunocastelo@gmail.com;11/1/2000;false;
+Client;antonio;porto;antonio@gmail.com;1/7/1999;false;
+Client;leo;lisboa;leo@gmail.com;11/9/2002;false;
+Client;miguel;guarda;miguel@gmail.com;21/9/2000;true
+Client;mariana;bragança;mariana22@gmail.com;29/3/2001;true
+Client;josé;viseu;jose@gmail.com;9/9/1998;true
+Client;pedro;sintra;pedro@gmail.com;2/9/2001;true
+Client;ana;sagres;ana@gmail.com;2/8/2001;true
