@@ -27,6 +27,12 @@ public class Food extends Product {
         this.fatPercent = fatPercent;
     }
 
+    public Food(int id, String name, double unitPrice, int stock, double nCalorie, double fatPercent) {
+        super(id, name, unitPrice, stock);
+        this.nCalorie = nCalorie;
+        this.fatPercent = fatPercent;
+    }
+
     /**
      * This copy constructor generates a new Food object based on the attributes of another object. It will be used on buy(Client b, Data d)
      * on class Manager.

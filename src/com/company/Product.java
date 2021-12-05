@@ -32,6 +32,20 @@ public abstract class Product implements Serializable {
     }
 
     /**
+     * Generates a new Product object without prom parameter
+     * @param id
+     * @param name
+     * @param unitPrice
+     * @param stock
+     */
+    public Product(int id, String name, double unitPrice, int stock) {
+        this.id = id;
+        this.name = name;
+        this.unitPrice = unitPrice;
+        this.stock = stock;
+    }
+
+    /**
      * This copy constructor generates a new Product object based on the attributes of another object. It will be used on buy(Client b, Data d)
      * on class Manager.
      *

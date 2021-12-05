@@ -99,7 +99,7 @@ public class Manager {
                             p.add(cl);
                         } else {
                             Furniture fur;
-                            if (!(split[6].equals (""))) {
+                            if (!(split[6].equals(""))) {
                                 fur = new Furniture(Integer.parseInt(split[2]), split[3], Double.parseDouble(split[4]), Integer.parseInt(split[5]),
                                         pro.get(Integer.parseInt(split[6])), Double.parseDouble(split[7]), Double.parseDouble(split[8]));
                             } else {

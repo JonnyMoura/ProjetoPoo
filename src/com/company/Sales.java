@@ -3,7 +3,7 @@ package com.company;
 import java.util.ArrayList;
 
 /**
- *
+ * Class Sales represents every sale made by the store(a purchase by the customer), it has direct interaction with class Client, since
  */
 public class Sales {
     private ArrayList<Product> p;

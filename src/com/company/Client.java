@@ -1,10 +1,11 @@
 package com.company;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Class client. Represents every client that has interaction with the store. It interacts directly with class Sales, since every customer
- * has its own associated purchases.
+ * has its own associated purchases and with class Data since every customer has a birthdate.
  * It has 6 attributes: String name(name of the customer);  String address(customer´s address); String email(customer´s email); Data birthDate(customer´s birthdate); boolean frequentClient(used to check if it is a frequent customer or a regular one, sine frequent will have different features available)
  * and ArrayList<Sales> s which represents every purchase the customer has done.
  * Methods: addS()
@@ -19,6 +20,7 @@ public class Client implements Serializable {
 
     /**
      * Generates a new Client object.
+     *
      * @param name
      * @param address
      * @param email
@@ -36,6 +38,7 @@ public class Client implements Serializable {
 
     /**
      * Returns attribute name
+     *
      * @return name
      */
     public String getName() {
@@ -44,6 +47,7 @@ public class Client implements Serializable {
 
     /**
      * Sets attribute name
+     *
      * @param name
      */
     public void setName(String name) {
@@ -52,6 +56,7 @@ public class Client implements Serializable {
 
     /**
      * Returns attribute address
+     *
      * @return address
      */
     public String getAddress() {
@@ -60,6 +65,7 @@ public class Client implements Serializable {
 
     /**
      * Sets attribute address
+     *
      * @param address
      */
     public void setAddress(String address) {
@@ -68,6 +74,7 @@ public class Client implements Serializable {
 
     /**
      * Returns attribute email
+     *
      * @return email
      */
     public String getEmail() {
@@ -76,6 +83,7 @@ public class Client implements Serializable {
 
     /**
      * Sets attribute email
+     *
      * @param email
      */
     public void setEmail(String email) {
@@ -84,6 +92,7 @@ public class Client implements Serializable {
 
     /**
      * Returns attribute birthDate
+     *
      * @return birthDate
      */
     public Data getBirthDate() {
@@ -92,6 +101,7 @@ public class Client implements Serializable {
 
     /**
      * Sets attribute birthDate
+     *
      * @param birthDate
      */
     public void setBirthDate(Data birthDate) {
@@ -100,6 +110,7 @@ public class Client implements Serializable {
 
     /**
      * Returns attribute frequentClient
+     *
      * @return frequentClient
      */
     public boolean isFrequentClient() {
@@ -108,6 +119,7 @@ public class Client implements Serializable {
 
     /**
      * Sets attribute frequentClient
+     *
      * @param frequentClient
      */
     public void setFrequentClient(boolean frequentClient) {
@@ -116,6 +128,7 @@ public class Client implements Serializable {
 
     /**
      * Returns attribute s
+     *
      * @return s
      */
     public ArrayList<Sales> getS() {
@@ -123,7 +136,6 @@ public class Client implements Serializable {
     }
 
     /**
-     *
      * @param s
      */
     public void setS(ArrayList<Sales> s) {
@@ -132,6 +144,7 @@ public class Client implements Serializable {
 
     /**
      * Adds new Sales type object to attribute ArrayList s;
+     *
      * @param sal
      */
     public void addS(Sales sal) {
@@ -149,7 +162,7 @@ public class Client implements Serializable {
                 ", email='" + email + '\'' +
                 ", birthDate=" + birthDate +
                 ", frequentClient=" + frequentClient +
-                ", s=" +s+
+                ", s=" + s +
                 '}';
     }
 }

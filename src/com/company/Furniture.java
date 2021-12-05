@@ -26,6 +26,12 @@ public class Furniture extends Product {
         this.dim = dim;
     }
 
+    public Furniture(int id, String name, double unitPrice, int stock, double weight, String dim) {
+        super(id, name, unitPrice, stock);
+        this.weight = weight;
+        this.dim = dim;
+    }
+
     /**
      * This copy constructor generates a new Furniture object based on the attributes of another object. It will be used on buy(Client b, Data d)
      * on class Manager.

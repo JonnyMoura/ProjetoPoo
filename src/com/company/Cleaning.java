@@ -23,6 +23,11 @@ public class Cleaning extends Product {
         this.tox = tox;
     }
 
+    public Cleaning(int id, String name, double unitPrice, int stock, int tox) {
+        super(id, name, unitPrice, stock);
+        this.tox = tox;
+    }
+
     /**
      * This copy constructor generates a new Cleaning object based on the attributes of another object. It will be used on buy(Client b, Data d)
      * on class Manager.
