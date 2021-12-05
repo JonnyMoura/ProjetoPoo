@@ -5,6 +5,6 @@ Product;Food;13459;milk;7.0;20;3;44;10
 Product;Cleaning;1234;detergent;4.0;9;4;3
 Product;Cleaning;3456;Disinfectant;3.5;15;5;7
 Product;Cleaning;9743;Bleach;8.0;5;6;10
-Product;Furniture;837;table;20.0;6;;10;10
+Product;Furniture;837;table;20.0;6;8;10;10
 Product;Furniture;495;chair;10.0;15;7;5;4
 Product;Furniture;674;Closet;40.0;10;8;20;16

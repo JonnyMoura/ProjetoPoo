@@ -11,6 +11,8 @@ public class ThreeTakeFour extends Promotion {
         return unitprice * (double)(count-count/4);
     }
 
-
-
+    @Override
+    public String toString() {
+        return super.toString() + "ThreeTakeFour";
+    }
 }

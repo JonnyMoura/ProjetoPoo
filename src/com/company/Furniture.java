@@ -41,10 +41,10 @@ public class Furniture extends Product {
     }
 
     public String toString() {
-        return "Furniture{" +
-                "weight=" + weight +
-                ", dim=" + dim +
-                "} " + super.toString();
+        return "Furniture Product--->" +
+                super.toString() +
+                ", weight=" + weight +
+                ", dim=" + dim;
     }
 
     @Override

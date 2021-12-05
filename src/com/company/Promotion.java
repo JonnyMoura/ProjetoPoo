@@ -29,4 +29,8 @@ public abstract class Promotion implements Serializable {
     }
     public abstract double calculaDesconto(double unitprice , int count);
 
+    @Override
+    public String toString() {
+        return "Promotion--->";
+    }
 }

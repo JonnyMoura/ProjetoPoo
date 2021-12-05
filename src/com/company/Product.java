@@ -77,13 +77,10 @@ public abstract class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", unitPrice=" + unitPrice +
-                ", stock=" + stock +
-                ", prom=" + prom +
-                '}';
+        return "Name=" + name  +
+                ", UnitPrice=" + unitPrice +
+                ", stock= " + stock +
+                ", prom= " + prom.toString();
     }
 
 

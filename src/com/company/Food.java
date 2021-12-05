@@ -41,10 +41,10 @@ public class Food extends Product {
 
     @Override
     public String toString() {
-        return "Food{" +
-                "nCalorie=" + nCalorie +
-                ", fatPercent=" + fatPercent +
-                "} " + super.toString();
+        return "Food Product--->" +
+                super.toString() +
+                ", nCalorie=" + nCalorie +
+                ", fatPercent=" + fatPercent;
     }
 
     @Override

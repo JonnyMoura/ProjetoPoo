@@ -28,9 +28,9 @@ public class Cleaning extends Product {
 
     @Override
     public String toString() {
-        return "Cleaning{" +
-                "tox=" + tox +
-                "} " + super.toString();
+        return "Cleaning product---->" +
+                super.toString() +
+                ", tox=" + tox;
     }
 
     @Override

@@ -1,4 +1,5 @@
 package com.company;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -9,25 +10,18 @@ public class Manager {
     private ArrayList<Promotion> pro;
 
     public static void main(String[] args) {
-        Manager m= new Manager();
-        /*m.readFile("promotion.txt");
+        Manager m = new Manager();
+        m.readFile("promotion.txt");
         m.readFile("producs.txt");
         m.readFile("clients.txt");
         m.writeProducs(m.p, new File("producs.obj"));
         m.writePromotions(m.pro, new File("promotions.obj"));
-        m.writeClients(m.c, new File("clients.obj"));  */
-        m.pro=m.readPromotion(new File("promotions.obj"));
-        m.p=m.readProducs(new File("producs.obj"));
-        m.c=m.readClients(new File("clients.obj"));
-        for(Product p : m.p){
-            System.out.println(p);
-        }
-        for(Promotion p : m.pro){
-            System.out.println(p);
-        }
-        for(Client p : m.c){
-            System.out.println(p);
-        }
+        m.writeClients(m.c, new File("clients.obj"));
+        m.pro = m.readPromotion(new File("promotions.obj"));
+        m.p = m.readProducs(new File("producs.obj"));
+        m.c = m.readClients(new File("clients.obj"));
+        m.menu();
+
 
     }
 
@@ -54,69 +48,61 @@ public class Manager {
         this.c = c;
     }
 
-    public void readFile(String file){
+    public void readFile(String file) {
         File f = new File(file);
-        if(f.exists() && f.isFile()) {
-            try{
-                FileReader fr= new FileReader(f);
-                BufferedReader br= new BufferedReader(fr);
+        if (f.exists() && f.isFile()) {
+            try {
+                FileReader fr = new FileReader(f);
+                BufferedReader br = new BufferedReader(fr);
                 String[] split;
                 String line;
-                while((line= br.readLine()) != null) {
-                    split=line.split(";");
-                    if(split[0].equals("Client")){
-                        String[] splitdata =split[4].split("/");
-                        Data d= new Data(Integer.parseInt(splitdata[0]),Integer.parseInt(splitdata[1]),Integer.parseInt(splitdata[2]));
-                        Client cl = new Client(split[1],split[2],split[3],d,Boolean.parseBoolean(split[5]));
+                while ((line = br.readLine()) != null) {
+                    split = line.split(";");
+                    if (split[0].equals("Client")) {
+                        String[] splitdata = split[4].split("/");
+                        Data d = new Data(Integer.parseInt(splitdata[0]), Integer.parseInt(splitdata[1]), Integer.parseInt(splitdata[2]));
+                        Client cl = new Client(split[1], split[2], split[3], d, Boolean.parseBoolean(split[5]));
                         c.add(cl);
-                    }
-                    else if(split[0].equals("Promotion")){
-                        String[] splitdata ;
-                        splitdata=split[2].split("/");
-                        Data d1= new Data(Integer.parseInt(splitdata[0]),Integer.parseInt(splitdata[1]),Integer.parseInt(splitdata[2]));
-                        splitdata=split[3].split("/");
-                        Data d2= new Data(Integer.parseInt(splitdata[0]),Integer.parseInt(splitdata[1]),Integer.parseInt(splitdata[2]));
-                        if(split[1].equals("PayLess")){
-                            PayLess pl= new PayLess(d1,d2);
+                    } else if (split[0].equals("Promotion")) {
+                        String[] splitdata;
+                        splitdata = split[2].split("/");
+                        Data d1 = new Data(Integer.parseInt(splitdata[0]), Integer.parseInt(splitdata[1]), Integer.parseInt(splitdata[2]));
+                        splitdata = split[3].split("/");
+                        Data d2 = new Data(Integer.parseInt(splitdata[0]), Integer.parseInt(splitdata[1]), Integer.parseInt(splitdata[2]));
+                        if (split[1].equals("PayLess")) {
+                            PayLess pl = new PayLess(d1, d2);
                             pro.add(pl);
-                        }
-                        else{
-                            ThreeTakeFour ttf= new ThreeTakeFour(d1,d2);
+                        } else {
+                            ThreeTakeFour ttf = new ThreeTakeFour(d1, d2);
                             pro.add(ttf);
                         }
-                    }
-                    else{
-                        if(split[1].equals("Food")){
+                    } else {
+                        if (split[1].equals("Food")) {
                             Food fd;
-                            if(split[6]!="") {
+                            if (!(split[6].equals(""))) {
                                 fd = new Food(Integer.parseInt(split[2]), split[3], Double.parseDouble(split[4]), Integer.parseInt(split[5]),
                                         pro.get(Integer.parseInt(split[6])), Double.parseDouble(split[7]), Double.parseDouble(split[8]));
-                            }
-                            else{
+                            } else {
                                 fd = new Food(Integer.parseInt(split[2]), split[3], Double.parseDouble(split[4]), Integer.parseInt(split[5]),
                                         Double.parseDouble(split[7]), Double.parseDouble(split[8]));
                             }
                             p.add(fd);
-                        }
-                        else if(split[1].equals("Cleaning")){
+                        } else if (split[1].equals("Cleaning")) {
                             Cleaning cl;
-                            if(split[6]!=""){
+                            if (!(split[6].equals(""))) {
                                 cl = new Cleaning(Integer.parseInt(split[2]), split[3], Double.parseDouble(split[4]), Integer.parseInt(split[5]),
                                         pro.get(Integer.parseInt(split[6])), Integer.parseInt(split[7]));
-                            }
-                            else{
+                            } else {
                                 cl = new Cleaning(Integer.parseInt(split[2]), split[3], Double.parseDouble(split[4]), Integer.parseInt(split[5]),
                                         Integer.parseInt(split[7]));
                             }
                             p.add(cl);
-                        }
-                        else{
+                        } else {
                             Furniture fur;
-                            if(split[6]!="") {
+                            if (!(split[6].equals (""))) {
                                 fur = new Furniture(Integer.parseInt(split[2]), split[3], Double.parseDouble(split[4]), Integer.parseInt(split[5]),
                                         pro.get(Integer.parseInt(split[6])), Double.parseDouble(split[7]), Double.parseDouble(split[8]));
-                            }
-                            else{
+                            } else {
                                 fur = new Furniture(Integer.parseInt(split[2]), split[3], Double.parseDouble(split[4]), Integer.parseInt(split[5]),
                                         Double.parseDouble(split[7]), Double.parseDouble(split[8]));
                             }
@@ -125,11 +111,13 @@ public class Manager {
                     }
                 }
                 br.close();
-            } catch(FileNotFoundException ex) {
+            } catch (FileNotFoundException ex) {
                 System.out.println("Erro a abrir ficheiro de texto.");
-            } catch( IOException ex ) {
-                System.out.println("Erro a ler ficheiro de texto.");}
-        } else{System.out.println("Ficheiro não existe.");
+            } catch (IOException ex) {
+                System.out.println("Erro a ler ficheiro de texto.");
+            }
+        } else {
+            System.out.println("Ficheiro não existe.");
         }
     }
 
@@ -243,7 +231,7 @@ public class Manager {
         }
     }
 
-    public double saleprice(ArrayList<Product> products,Data d) {
+    public double saleprice(ArrayList<Product> products, Data d) {
         double salepriceaux = 0;
         for (Product prod : products) {
             if (prod.getProm() == null) {
@@ -261,15 +249,17 @@ public class Manager {
         ArrayList<Product> prod = new ArrayList<>();
         int option;
         do {
-            System.out.println("Available products:\n");
+            System.out.println("Available products:");
+            System.out.println("==================================================");
             for (Product i : p) {
                 System.out.println(i);
             }
+            System.out.println("===================================================");
             System.out.println("Select the product you wish to buy");
             Scanner nc = new Scanner(System.in);
             String pr = nc.nextLine();
             System.out.println("How many units?");
-            int units = 0;
+            int units;
             Scanner mc = new Scanner(System.in);
             do {
                 while (!mc.hasNextInt()) {//checks if the input is an integer
@@ -283,9 +273,9 @@ public class Manager {
             } while (units <= 0);
             int aux = 0;
             for (Product i : p) {
-                if ((i.getName().equals(pr)) && i.getStock() > 0) {
+                if ((i.getName().equalsIgnoreCase(pr)) && i.getStock() > 0 && i.getStock() >= units) {
                     aux += 1;
-                    System.out.println("Succesfully added to the cart! \n");
+                    System.out.println("Succesfully added to the cart! ");
                     i.setStock(i.getStock() - units);
                     Product cpy = i.copy();
                     cpy.setStock(units);
@@ -297,19 +287,21 @@ public class Manager {
             if (aux == 1) {
                 for (Product j : prod) {
                     if (pr.equals(j.getName())) {
-                        j.setStock( units);
+                        j.setStock(units);
                     }
                 }
             } else {
-                System.out.println("Product not available or out of stock!\n");
+                System.out.println("Product not available or out of stock!");
 
 
             }
-            System.out.println("Your cart until this moment:\n");
+            System.out.println("Your cart until this moment:");
+            System.out.println("=============================================");
             for (Product i : prod) {
-                System.out.println(i.toString());
+                System.out.println(i);
             }
-            System.out.println("Insert -1 to finish buying or any number to continue \n");
+            System.out.println("=============================================");
+            System.out.println("Insert -1 to finish buying or any number to continue ");
             Scanner sc = new Scanner(System.in);
             while (!sc.hasNextInt()) {//checks if the input is an integer
                 System.out.println("Invalid data\nInsert number");
@@ -318,7 +310,8 @@ public class Manager {
             option = sc.nextInt();
 
         } while (option != -1);
-        Sales s = new Sales(prod,saleprice(prod,d),b, d);
+        System.out.println(prod);
+        Sales s = new Sales(prod, saleprice(prod, d), b, d);
         System.out.println("Your purchase:\n");
         System.out.println(s);
         return s;
@@ -333,20 +326,51 @@ public class Manager {
         }
     }
 
+    private Data changeDate() {
+        System.out.println("Insert day:");
 
-    private double dimensionCalc(double height, double length, double width) {
-        return (height * length * width);
+        Scanner dc = new Scanner(System.in);
+        while (!dc.hasNextInt()) {//checks if the input is an integer
+            System.out.println("Invalid data\nInsert number");
+            dc.next();
+        }
+        int day = dc.nextInt();
+
+        System.out.println("Insert month");
+
+        Scanner mc = new Scanner(System.in);
+        while (!mc.hasNextInt()) {
+            System.out.println("Invalid data\nInsert number");
+            mc.next();
+        }
+
+        int month = mc.nextInt();
+
+        System.out.println("Insert year");
+
+        Scanner yc = new Scanner(System.in);
+        while (!yc.hasNextInt()) {
+            System.out.println("Invalid data\nInsert number");
+            yc.next();
+        }
+        int year = yc.nextInt();
+
+        return new Data(day, month, year);
     }
 
-    public void menu(Data d) {
+
+    public void menu() {
+        Data d = changeDate();
         Client b = login();
         int n;
 
         do {
-            System.out.println("Select an option");
+            System.out.println("=============================MENU==========================");
             System.out.println("1 -Make a purchase");
             System.out.println("2 -View made purchases");
+            System.out.println("3-Change current date");
             System.out.println("Any number-Exit");
+            System.out.println("===========================================================");
             Scanner sc = new Scanner(System.in);
             while (!sc.hasNextInt()) {//checks if the input is an integer
                 System.out.println("Invalid data\nInsert number");
@@ -357,18 +381,20 @@ public class Manager {
 
             switch (n) {
                 case 1 -> {
-                    buy(b, d);
-
+                    Sales m = buy(b, d);
+                    b.setS(m);
 
                 }
 
-                case 2 -> {
-                    //consultSales(b)
-                }
+                case 2 -> consultSales(b);
+                case 3 -> d = changeDate();
 
 
             }
-        } while (n == 1 || n == 2);
+        } while (n == 1 || n == 2 || n == 3);
+        writeProducs(p, new File("producs.obj"));
+        writePromotions(pro, new File("promotions.obj"));
+        writeClients(c, new File("clients.obj"));
         System.exit(0);
     }
 }

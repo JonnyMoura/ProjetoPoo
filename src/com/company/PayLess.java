@@ -21,4 +21,9 @@ public class PayLess extends Promotion{
         }
         return price;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + "PayLess";
+    }
 }
