@@ -3,46 +3,104 @@ package com.company;
 import java.util.ArrayList;
 
 /**
- * Class Sales represents every sale made by the store(a purchase by the customer), it has direct interaction with class Client, since
+ * Class Sales represents every sale made by the store(a purchase by the customer), it has direct interaction with class Client, since every pruchase is associated with a client,
+ * with class Product since every purchase is made of one or multiple products and class Data since one of the attributes is the date of sale.
+ * It has 4 attributes: ArrayList<Product> p(list of purchased items); double salePrice(price of the various products), Client client(client who made the purchase) and Data saledate(date when the purchase was made).
+ * Methods: transportCost(), addP()
  */
 public class Sales {
     private ArrayList<Product> p;
     private double salePrice;
     private Client client;
-    private Data saledate;
+    private Data saleDate;
 
+    /**
+     * Generates a new Client object.
+     *
+     * @param p
+     * @param salePrice
+     * @param client
+     * @param saledate
+     */
     public Sales(ArrayList<Product> p, double salePrice, Client client, Data saledate) {
         this.client = client;
         this.p = p;
         this.salePrice = salePrice;
-        this.saledate = saledate;
+        this.saleDate = saledate;
     }
 
-    public void setP(Product prod) {
-        p.add(prod);
-    }
-
+    /**
+     * Returns attribute p
+     *
+     * @return p
+     */
     public ArrayList<Product> getP() {
         return p;
     }
 
-    public Data getSaledate() {
-        return saledate;
+    public void setP(ArrayList<Product> p) {
+        this.p = p;
     }
 
-    public void setSaledate(Data saledate) {
-        this.saledate = saledate;
-    }
-
+    /**
+     * Returns attribute salePrice
+     *
+     * @return salePrice
+     */
     public double getSalePrice() {
         return salePrice;
     }
 
-    public void setSalePrice(int salePrice) {
+    /**
+     * Sets attribute salePrice
+     *
+     * @param salePrice
+     */
+    public void setSalePrice(double salePrice) {
         this.salePrice = salePrice;
     }
 
+    /**
+     * Returns attribute client
+     *
+     * @return client
+     */
+    public Client getClient() {
+        return client;
+    }
 
+    /**
+     * Sets attribute client
+     *
+     * @param client
+     */
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    /**
+     * Returns attribute saleDate
+     *
+     * @return
+     */
+    public Data getSaleDate() {
+        return saleDate;
+    }
+
+    /**
+     * Sets attribute saleDate
+     *
+     * @param saleDate
+     */
+    public void setSaleDate(Data saleDate) {
+        this.saleDate = saleDate;
+    }
+
+    /**
+     * Calculates the transport cost of the sale, if a customer is a frequent one he will pay only 20, if the sale costs less then 40 while an regular one will pay 20 in every circumstance
+     *
+     * @return transport cost
+     */
     public int transportCost() {
         int transportcost = 0;
         if (client.isFrequentClient()) {
@@ -57,15 +115,26 @@ public class Sales {
         return transportcost;
     }
 
+    /**
+     * adds a product to the product ArrayList associated with the sale.
+     *
+     * @param prod
+     */
+    public void addP(Product prod) {
+        p.add(prod);
+    }
 
     @Override
+    /**
+     * Returns Sales attributes as a String.
+     */
     public String toString() {
         return "Sale:\n" +
                 "Products purchased=" + p + "\n" +
                 "salePrice-->" + salePrice + "\n" +
                 "transportcost -->" + transportCost() + "\n" +
                 "Client=" + client.getName() + "\n" +
-                "saledate=" + saledate + "\n";
+                "saledate=" + saleDate + "\n";
     }
 
 }
