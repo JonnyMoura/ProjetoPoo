@@ -382,7 +382,7 @@ public class Manager {
             switch (n) {
                 case 1 -> {
                     Sales m = buy(b, d);
-                    b.setS(m);
+                    b.addS(m);
 
                 }
 

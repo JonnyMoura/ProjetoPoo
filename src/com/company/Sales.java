@@ -2,6 +2,9 @@ package com.company;
 
 import java.util.ArrayList;
 
+/**
+ *
+ */
 public class Sales {
     private ArrayList<Product> p;
     private double salePrice;
