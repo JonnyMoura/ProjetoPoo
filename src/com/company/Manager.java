@@ -15,7 +15,7 @@ public class Manager {
         m.readFile("clients.txt");
         m.writeProducs(m.p, new File("producs.obj"));
         m.writePromotions(m.pro, new File("promotions.obj"));
-        m.writeClients(m.c, new File("clients.obj"));*/
+        m.writeClients(m.c, new File("clients.obj"));  */
         m.pro=m.readPromotion(new File("promotions.obj"));
         m.p=m.readProducs(new File("producs.obj"));
         m.c=m.readClients(new File("clients.obj"));
