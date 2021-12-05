@@ -1,10 +1,13 @@
 package com.company;
+
+import java.io.Serializable;
+
 /**
  * Stores a date on the format D/M/Y
  *
  * @author joanm
  */
-public class Data {
+public class Data implements Serializable {
 //Attributes
 
     private int day;

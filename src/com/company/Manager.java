@@ -1,7 +1,6 @@
 package com.company;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Manager {
@@ -11,9 +10,22 @@ public class Manager {
 
     public static void main(String[] args) {
         Manager m= new Manager();
-        m.readFile("promotion.txt");
+        /*m.readFile("promotion.txt");
         m.readFile("producs.txt");
+        m.readFile("clients.txt");
+        m.writeProducs(m.p, new File("producs.obj"));
+        m.writePromotions(m.pro, new File("promotions.obj"));
+        m.writeClients(m.c, new File("clients.obj"));*/
+        m.pro=m.readPromotion(new File("promotions.obj"));
+        m.p=m.readProducs(new File("producs.obj"));
+        m.c=m.readClients(new File("clients.obj"));
         for(Product p : m.p){
+            System.out.println(p);
+        }
+        for(Promotion p : m.pro){
+            System.out.println(p);
+        }
+        for(Client p : m.c){
             System.out.println(p);
         }
 
@@ -120,6 +132,91 @@ public class Manager {
         } else{System.out.println("Ficheiro não existe.");
         }
     }
+
+    public void writeProducs(ArrayList<Product> produtos, File ficheiro) {
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ficheiro));
+            oos.writeObject(produtos);
+            oos.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("Erro ao ler ou criar ficheiro ");
+        } catch (IOException ex) {
+            System.out.println("Erro ao gravar o objeto no ficheiro");
+        }
+    }
+
+    public void writePromotions(ArrayList<Promotion> promotions, File fich) {
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fich));
+            oos.writeObject(promotions);
+            oos.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("Erro ao ler ou criar ficheiro ");
+        } catch (IOException ex) {
+            System.out.println("Erro ao gravar o objeto no ficheiro");
+        }
+    }
+
+    public void writeClients(ArrayList<Client> clients, File fich) {
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fich));
+            oos.writeObject(clients);
+            oos.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("Erro ao ler ou criar ficheiro ");
+        } catch (IOException ex) {
+            System.out.println("Erro ao gravar o objeto no ficheiro");
+        }
+    }
+
+    public ArrayList<Product> readProducs(File ficheiro) {
+        ArrayList<Product> produtos = new ArrayList<>();
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ficheiro));
+            produtos = (ArrayList<Product>) ois.readObject();
+            ois.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("Erro a abrir ficheiro.");
+        } catch (IOException ex) {
+            System.out.println("Erro a ler ficheiro.");
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Erro a converter objeto.");
+        }
+        return produtos;
+    }
+
+    public ArrayList<Promotion> readPromotion(File fich) {
+        ArrayList<Promotion> promotions = new ArrayList<>();
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fich));
+            promotions = (ArrayList<Promotion>) ois.readObject();
+            ois.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("Erro a abrir ficheiro.");
+        } catch (IOException ex) {
+            System.out.println("Erro a ler ficheiro.");
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Erro a converter objeto.");
+        }
+        return promotions;
+    }
+
+    public ArrayList<Client> readClients(File fich) {
+        ArrayList<Client> clients = new ArrayList<>();
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fich));
+            clients = (ArrayList<Client>) ois.readObject();
+            ois.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("Erro a abrir ficheiro.");
+        } catch (IOException ex) {
+            System.out.println("Erro a ler ficheiro.");
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Erro a converter objeto.");
+        }
+        return clients;
+    }
+
 
     public Client login() {
         System.out.print("Insert email :");

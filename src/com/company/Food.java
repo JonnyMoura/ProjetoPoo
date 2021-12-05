@@ -1,5 +1,5 @@
-
 package com.company;
+
 public class Food extends Product {
     private double nCalorie;
     private double fatPercent;

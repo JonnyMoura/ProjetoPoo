@@ -1,6 +1,8 @@
 package com.company;
 
-public abstract class Promotion {
+import java.io.Serializable;
+
+public abstract class Promotion implements Serializable {
     private Data startDate;
     private Data finalDate;
 

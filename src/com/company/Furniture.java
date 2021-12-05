@@ -1,4 +1,5 @@
 package com.company;
+
 public class Furniture extends Product {
     private double weight;
     private double dim;

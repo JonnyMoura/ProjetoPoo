@@ -1,7 +1,8 @@
 package com.company;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Client {
+public class Client implements Serializable {
     private String name;
     private String address;
     private String email;
