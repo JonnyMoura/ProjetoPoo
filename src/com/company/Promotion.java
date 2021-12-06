@@ -7,9 +7,9 @@ public abstract class Promotion implements Serializable {
     private Data finalDate;
 
 
-    public Promotion(Data startDate ,Data finalDate) {
-        this.startDate=startDate;
-        this.finalDate=finalDate;
+    public Promotion(Data startDate, Data finalDate) {
+        this.startDate = startDate;
+        this.finalDate = finalDate;
     }
 
     public Data getStartDate() {
@@ -27,7 +27,8 @@ public abstract class Promotion implements Serializable {
     public void setFinalDate(Data finalDate) {
         this.finalDate = finalDate;
     }
-    public abstract double calculaDesconto(double unitprice , int count);
+
+    public abstract double calculaDesconto(double unitprice, int count);
 
     @Override
     public String toString() {
