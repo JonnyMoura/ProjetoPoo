@@ -11,25 +11,14 @@ public class Manager {
 
     public static void main(String[] args) {
         Manager m = new Manager();
-        m.readFile("promotion.txt");
-        m.readFile("producs.txt");
-        m.readFile("clients.txt");
-        m.writeProducs(m.p, new File("producs.obj"));
-        m.writePromotions(m.pro, new File("promotions.obj"));
-        m.writeClients(m.c, new File("clients.obj"));
-        m.pro = m.readPromotion(new File("promotions.obj"));
-        m.p = m.readProducs(new File("producs.obj"));
-        m.c = m.readClients(new File("clients.obj"));
+        m.loadData("clients.obj","producs.obj","promotions.obj");
         m.menu();
-
-
     }
 
     public Manager() {
         p = new ArrayList<>();
         c = new ArrayList<>();
         pro = new ArrayList<>();
-
     }
 
     public ArrayList<Product> getP() {
@@ -46,6 +35,25 @@ public class Manager {
 
     public void setC(ArrayList<Client> c) {
         this.c = c;
+    }
+
+    public void loadData(String fclients,String fproducs,String fpromotions){
+        File fc = new File(fclients);
+        File fp = new File(fproducs);
+        File fpro = new File(fpromotions);
+        if (fc.exists() && fp.exists() && fpro.exists()) {
+            c=readClients(fc);
+            p=readProducs(fp);
+            pro=readPromotion(fpro);
+
+        }else{
+            readFile("clients.txt");
+            readFile("promotion.txt");
+            readFile("producs.txt");
+            writePromotions(pro, fpro);
+            writeClients(c, fc);
+            writeProducs(p, fp);
+        }
     }
 
     public void readFile(String file) {
@@ -101,10 +109,10 @@ public class Manager {
                             Furniture fur;
                             if (!(split[6].equals(""))) {
                                 fur = new Furniture(Integer.parseInt(split[2]), split[3], Double.parseDouble(split[4]), Integer.parseInt(split[5]),
-                                        pro.get(Integer.parseInt(split[6])), Double.parseDouble(split[7]), Double.parseDouble(split[8]));
+                                        pro.get(Integer.parseInt(split[6])), Double.parseDouble(split[7]),split[8]);
                             } else {
                                 fur = new Furniture(Integer.parseInt(split[2]), split[3], Double.parseDouble(split[4]), Integer.parseInt(split[5]),
-                                        Double.parseDouble(split[7]), Double.parseDouble(split[8]));
+                                        Double.parseDouble(split[7]), split[8]);
                             }
                             p.add(fur);
                         }
@@ -392,9 +400,8 @@ public class Manager {
 
             }
         } while (n == 1 || n == 2 || n == 3);
-        writeProducs(p, new File("producs.obj"));
-        writePromotions(pro, new File("promotions.obj"));
         writeClients(c, new File("clients.obj"));
+        writeProducs(p, new File("producs.obj"));
         System.exit(0);
     }
 }

@@ -174,7 +174,7 @@ public abstract class Product implements Serializable {
         return "Name=" + name +
                 ", UnitPrice=" + unitPrice +
                 ", stock= " + stock +
-                ", prom= " + prom.toString();
+                ", prom= "+ prom;
     }
 
 
