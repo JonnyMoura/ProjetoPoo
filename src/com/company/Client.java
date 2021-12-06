@@ -11,6 +11,8 @@ import java.util.ArrayList;
  * Methods: addS()
  */
 public class Client implements Serializable {
+// Attributes
+
     private String name;
     private String address;
     private String email;
@@ -18,14 +20,17 @@ public class Client implements Serializable {
     private boolean frequentClient;
     private ArrayList<Sales> s;
 
+
+//Constructors
+
     /**
      * Generates a new Client object.
      *
-     * @param name
-     * @param address
-     * @param email
-     * @param birthDate
-     * @param frequentClient
+     * @param name           client name
+     * @param address        client address
+     * @param email          client email
+     * @param birthDate      client birthdate
+     * @param frequentClient client frequentClient
      */
     public Client(String name, String address, String email, Data birthDate, boolean frequentClient) {
         this.name = name;
@@ -35,6 +40,10 @@ public class Client implements Serializable {
         this.frequentClient = frequentClient;
         s = new ArrayList<>();
     }
+
+
+//Methods
+
 
     /**
      * Returns attribute name
@@ -48,7 +57,7 @@ public class Client implements Serializable {
     /**
      * Sets attribute name
      *
-     * @param name
+     * @param name client name
      */
     public void setName(String name) {
         this.name = name;
@@ -66,7 +75,7 @@ public class Client implements Serializable {
     /**
      * Sets attribute address
      *
-     * @param address
+     * @param address client address
      */
     public void setAddress(String address) {
         this.address = address;
@@ -84,7 +93,7 @@ public class Client implements Serializable {
     /**
      * Sets attribute email
      *
-     * @param email
+     * @param email client email
      */
     public void setEmail(String email) {
         this.email = email;
@@ -102,7 +111,7 @@ public class Client implements Serializable {
     /**
      * Sets attribute birthDate
      *
-     * @param birthDate
+     * @param birthDate client birthdate
      */
     public void setBirthDate(Data birthDate) {
         this.birthDate = birthDate;
@@ -120,7 +129,7 @@ public class Client implements Serializable {
     /**
      * Sets attribute frequentClient
      *
-     * @param frequentClient
+     * @param frequentClient if client is frequent
      */
     public void setFrequentClient(boolean frequentClient) {
         this.frequentClient = frequentClient;
@@ -136,7 +145,9 @@ public class Client implements Serializable {
     }
 
     /**
-     * @param s
+     * Sets attribute s
+     *
+     * @param s Sales ArrayList
      */
     public void setS(ArrayList<Sales> s) {
         this.s = s;
@@ -145,7 +156,7 @@ public class Client implements Serializable {
     /**
      * Adds new Sales type object to attribute ArrayList s;
      *
-     * @param sal
+     * @param sal Sale
      */
     public void addS(Sales sal) {
         s.add(sal);

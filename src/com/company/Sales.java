@@ -6,29 +6,34 @@ import java.util.ArrayList;
 /**
  * Class Sales represents every sale made by the store(a purchase by the customer), it has direct interaction with class Client, since every pruchase is associated with a client,
  * with class Product since every purchase is made of one or multiple products and class Data since one of the attributes is the date of sale.
- * It has 4 attributes: ArrayList<Product> p(list of purchased items); double salePrice(price of the various products), Client client(client who made the purchase) and Data saledate(date when the purchase was made).
+ * It has 4 attributes: ArrayList<Product> p(list of purchased items); double salePrice(price of the various products), Client client(client who made the purchase) and Data saleDate(date when the purchase was made).
  * Methods: transportCost(), addP()
  */
 public class Sales implements Serializable {
+//Attributes
+
     private ArrayList<Product> p;
     private double salePrice;
     private Client client;
     private Data saleDate;
 
+//Constructors
+
     /**
      * Generates a new Client object.
      *
-     * @param p
-     * @param salePrice
-     * @param client
-     * @param saledate
+     * @param p         product ArrayList
+     * @param salePrice price of sale
+     * @param client    client who made the purchase
+     * @param saleDate  date when the sale was made
      */
-    public Sales(ArrayList<Product> p, double salePrice, Client client, Data saledate) {
+    public Sales(ArrayList<Product> p, double salePrice, Client client, Data saleDate) {
         this.client = client;
         this.p = p;
         this.salePrice = salePrice;
-        this.saleDate = saledate;
+        this.saleDate = saleDate;
     }
+//Methods
 
     /**
      * Returns attribute p
@@ -39,6 +44,11 @@ public class Sales implements Serializable {
         return p;
     }
 
+    /**
+     * Sets attribute p
+     *
+     * @param p product ArrayList
+     */
     public void setP(ArrayList<Product> p) {
         this.p = p;
     }
@@ -55,7 +65,7 @@ public class Sales implements Serializable {
     /**
      * Sets attribute salePrice
      *
-     * @param salePrice
+     * @param salePrice price of sale
      */
     public void setSalePrice(double salePrice) {
         this.salePrice = salePrice;
@@ -73,7 +83,7 @@ public class Sales implements Serializable {
     /**
      * Sets attribute client
      *
-     * @param client
+     * @param client client who made the purchase
      */
     public void setClient(Client client) {
         this.client = client;
@@ -82,7 +92,7 @@ public class Sales implements Serializable {
     /**
      * Returns attribute saleDate
      *
-     * @return
+     * @return saleDate
      */
     public Data getSaleDate() {
         return saleDate;
@@ -91,7 +101,7 @@ public class Sales implements Serializable {
     /**
      * Sets attribute saleDate
      *
-     * @param saleDate
+     * @param saleDate date when the sale was made
      */
     public void setSaleDate(Data saleDate) {
         this.saleDate = saleDate;
@@ -119,7 +129,7 @@ public class Sales implements Serializable {
     /**
      * adds a product to the product ArrayList associated with the sale.
      *
-     * @param prod
+     * @param prod product to be added
      */
     public void addP(Product prod) {
         p.add(prod);

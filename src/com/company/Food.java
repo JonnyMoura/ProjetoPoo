@@ -7,26 +7,38 @@ package com.company;
  * Methods: copy(),costExtra()
  */
 public class Food extends Product {
+    //Attributes
     private double nCalorie;
     private double fatPercent;
 
     /**
      * Generates a new Food object.
      *
-     * @param id
-     * @param name
-     * @param unitPrice
-     * @param stock
-     * @param prom
-     * @param nCalorie
-     * @param fatPercent
+     * @param id         product identifier
+     * @param name       product name
+     * @param unitPrice  product price for unit
+     * @param stock      available product stock
+     * @param prom       product promotion
+     * @param nCalorie   number of calories
+     * @param fatPercent fat percentage
      */
+// Constructors
     public Food(int id, String name, double unitPrice, int stock, Promotion prom, double nCalorie, double fatPercent) {
         super(id, name, unitPrice, stock, prom);
         this.nCalorie = nCalorie;
         this.fatPercent = fatPercent;
     }
 
+    /**
+     * Generates a new Food object without prom parameter
+     *
+     * @param id         product identifier
+     * @param name       product name
+     * @param unitPrice  product price for unit
+     * @param stock      available product stock
+     * @param nCalorie   number of calories
+     * @param fatPercent fat percentage
+     */
     public Food(int id, String name, double unitPrice, int stock, double nCalorie, double fatPercent) {
         super(id, name, unitPrice, stock);
         this.nCalorie = nCalorie;
@@ -37,7 +49,7 @@ public class Food extends Product {
      * This copy constructor generates a new Food object based on the attributes of another object. It will be used on buy(Client b, Data d)
      * on class Manager.
      *
-     * @param another
+     * @param another new Food object
      */
     public Food(Food another) {
         super(another);
@@ -45,6 +57,7 @@ public class Food extends Product {
         this.fatPercent = another.fatPercent;
 
     }
+//Methods
 
     /**
      * Returns attribute nCalorie
@@ -58,7 +71,7 @@ public class Food extends Product {
     /**
      * Sets attribute nCalorie
      *
-     * @param nCalorie
+     * @param nCalorie number of calories
      */
     public void setnCalorie(double nCalorie) {
         this.nCalorie = nCalorie;
@@ -76,7 +89,7 @@ public class Food extends Product {
     /**
      * Sets attribute fatPercent
      *
-     * @param fatPercent
+     * @param fatPercent fat percentage
      */
     public void setFatPercent(double fatPercent) {
         this.fatPercent = fatPercent;

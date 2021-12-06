@@ -11,7 +11,7 @@ public class Manager {
 
     public static void main(String[] args) {
         Manager m = new Manager();
-        m.loadData("clients.obj","producs.obj","promotions.obj");
+        m.loadData("clients.obj", "producs.obj", "promotions.obj");
         m.menu();
     }
 
@@ -37,16 +37,16 @@ public class Manager {
         this.c = c;
     }
 
-    public void loadData(String fclients,String fproducs,String fpromotions){
+    public void loadData(String fclients, String fproducs, String fpromotions) {
         File fc = new File(fclients);
         File fp = new File(fproducs);
         File fpro = new File(fpromotions);
         if (fc.exists() && fp.exists() && fpro.exists()) {
-            c=readClients(fc);
-            p=readProducs(fp);
-            pro=readPromotion(fpro);
+            c = readClients(fc);
+            p = readProducs(fp);
+            pro = readPromotion(fpro);
 
-        }else{
+        } else {
             readFile("clients.txt");
             readFile("promotion.txt");
             readFile("producs.txt");
@@ -109,7 +109,7 @@ public class Manager {
                             Furniture fur;
                             if (!(split[6].equals(""))) {
                                 fur = new Furniture(Integer.parseInt(split[2]), split[3], Double.parseDouble(split[4]), Integer.parseInt(split[5]),
-                                        pro.get(Integer.parseInt(split[6])), Double.parseDouble(split[7]),split[8]);
+                                        pro.get(Integer.parseInt(split[6])), Double.parseDouble(split[7]), split[8]);
                             } else {
                                 fur = new Furniture(Integer.parseInt(split[2]), split[3], Double.parseDouble(split[4]), Integer.parseInt(split[5]),
                                         Double.parseDouble(split[7]), split[8]);
@@ -246,7 +246,7 @@ public class Manager {
                 salepriceaux += prod.getUnitPrice() * prod.getStock();
             } else {
                 if (!verifyData(d, prod.getProm().getStartDate()) && verifyData(d, prod.getProm().getFinalDate())) {
-                    salepriceaux += prod.getProm().calculaDesconto(prod.getUnitPrice(), prod.getStock());
+                    salepriceaux += prod.getProm().calculateDiscount(prod.getUnitPrice(), prod.getStock());
                 } else salepriceaux += prod.getUnitPrice() * prod.getStock();
             }
         }

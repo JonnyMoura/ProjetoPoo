@@ -8,20 +8,24 @@ import java.io.Serializable;
  * Methods: copy(),costExtra()
  */
 public abstract class Product implements Serializable {
+//Attributes
+
+
     private int id;
     private String name;
     private double unitPrice;
     private int stock;
     private Promotion prom;
 
+//Constructors
     /**
      * Generates a new Product object.
      *
-     * @param id
-     * @param name
-     * @param unitPrice
-     * @param stock
-     * @param prom
+     * @param id product identifier
+     * @param name product name
+     * @param unitPrice product price for unit
+     * @param stock available product stock
+     * @param prom product promotion
      */
     public Product(int id, String name, double unitPrice, int stock, Promotion prom) {
         this.id = id;
@@ -33,10 +37,10 @@ public abstract class Product implements Serializable {
 
     /**
      * Generates a new Product object without prom parameter
-     * @param id
-     * @param name
-     * @param unitPrice
-     * @param stock
+     * @param id product identifier
+     * @param name product name
+     * @param unitPrice product price for unit
+     * @param stock available product stock
      */
     public Product(int id, String name, double unitPrice, int stock) {
         this.id = id;
@@ -49,7 +53,7 @@ public abstract class Product implements Serializable {
      * This copy constructor generates a new Product object based on the attributes of another object. It will be used on buy(Client b, Data d)
      * on class Manager.
      *
-     * @param another
+     * @param another new product object
      */
     public Product(Product another) {
         this.id = another.id;
@@ -58,7 +62,7 @@ public abstract class Product implements Serializable {
         this.stock = another.stock;
         this.prom = another.prom;
     }
-
+//Methods
     /**
      * Returns attribute id
      *
@@ -72,7 +76,7 @@ public abstract class Product implements Serializable {
     /**
      * Sets attribute id
      *
-     * @param id
+     * @param id product identifier
      */
     public void setId(int id) {
         this.id = id;
@@ -90,7 +94,7 @@ public abstract class Product implements Serializable {
     /**
      * Sets attribute name
      *
-     * @param name
+     * @param name product name
      */
     public void setName(String name) {
         this.name = name;
@@ -108,7 +112,7 @@ public abstract class Product implements Serializable {
     /**
      * Sets attribute unitPrice
      *
-     * @param unitPrice
+     * @param unitPrice product price for unit
      */
     public void setUnitPrice(double unitPrice) {
         this.unitPrice = unitPrice;
@@ -126,7 +130,7 @@ public abstract class Product implements Serializable {
     /**
      * Sets attribute stock
      *
-     * @param stock
+     * @param stock available product stock
      */
     public void setStock(int stock) {
         this.stock = stock;
@@ -144,7 +148,7 @@ public abstract class Product implements Serializable {
     /**
      * Sets attribute prom
      *
-     * @param prom
+     * @param prom product promotion
      */
     public void setProm(Promotion prom) {
         this.prom = prom;

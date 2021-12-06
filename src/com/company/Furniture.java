@@ -6,19 +6,23 @@ package com.company;
  * Methods: copy(),costExtra()
  */
 public class Furniture extends Product {
+//Attributes
+
     private double weight;
     private String dim;
+
+//Constructors
 
     /**
      * Generates a new Furniture object.
      *
-     * @param id
-     * @param name
-     * @param unitPrice
-     * @param stock
-     * @param prom
-     * @param weight
-     * @param dim
+     * @param id        product identifier
+     * @param name      product name
+     * @param unitPrice product price for unit
+     * @param stock     available product stock
+     * @param prom      product promotion
+     * @param weight    product weight
+     * @param dim       product dimension
      */
     public Furniture(int id, String name, double unitPrice, int stock, Promotion prom, double weight, String dim) {
         super(id, name, unitPrice, stock, prom);
@@ -26,6 +30,16 @@ public class Furniture extends Product {
         this.dim = dim;
     }
 
+    /**
+     * Generates a new Furniture object without prom parameter
+     *
+     * @param id        product identifier
+     * @param name      product name
+     * @param unitPrice product price for unit
+     * @param stock     available product stock
+     * @param weight    product weight
+     * @param dim       product dimension
+     */
     public Furniture(int id, String name, double unitPrice, int stock, double weight, String dim) {
         super(id, name, unitPrice, stock);
         this.weight = weight;
@@ -36,7 +50,7 @@ public class Furniture extends Product {
      * This copy constructor generates a new Furniture object based on the attributes of another object. It will be used on buy(Client b, Data d)
      * on class Manager.
      *
-     * @param another
+     * @param another new Furniture object
      */
     public Furniture(Furniture another) {
         super(another);
@@ -45,6 +59,7 @@ public class Furniture extends Product {
 
 
     }
+//Methods
 
     /**
      * Returns attribute weight
@@ -58,7 +73,7 @@ public class Furniture extends Product {
     /**
      * Sets attribute weight
      *
-     * @param weight
+     * @param weight product weight
      */
     public void setWeight(double weight) {
         this.weight = weight;
@@ -76,7 +91,7 @@ public class Furniture extends Product {
     /**
      * Sets attribute dim
      *
-     * @param dim
+     * @param dim product dimension
      */
     public void setDim(String dim) {
         this.dim = dim;

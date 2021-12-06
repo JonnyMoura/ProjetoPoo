@@ -6,23 +6,34 @@ package com.company;
  * Methods: copy(),costExtra()
  */
 public class Cleaning extends Product {
+    //Attributes
     private int tox;
+//Constructors
 
     /**
-     * Generates a new Furniture object.
+     * Generates a new Cleaning object.
      *
-     * @param id
-     * @param name
-     * @param unitPrice
-     * @param stock
-     * @param prom
-     * @param tox
+     * @param id        product identifier
+     * @param name      product name
+     * @param unitPrice product price for unit
+     * @param stock     available product stock
+     * @param prom      product promotion
+     * @param tox       product toxicity
      */
     public Cleaning(int id, String name, double unitPrice, int stock, Promotion prom, int tox) {
         super(id, name, unitPrice, stock, prom);
         this.tox = tox;
     }
 
+    /**
+     * Generates a new Cleaning object without prom parameter
+     *
+     * @param id        product identifier
+     * @param name      product name
+     * @param unitPrice product price for unit
+     * @param stock     available product stock
+     * @param tox       product toxicity
+     */
     public Cleaning(int id, String name, double unitPrice, int stock, int tox) {
         super(id, name, unitPrice, stock);
         this.tox = tox;
@@ -32,13 +43,14 @@ public class Cleaning extends Product {
      * This copy constructor generates a new Cleaning object based on the attributes of another object. It will be used on buy(Client b, Data d)
      * on class Manager.
      *
-     * @param another
+     * @param another new Cleaning object
      */
     public Cleaning(Cleaning another) {
         super(another);
         this.tox = another.tox;
 
     }
+//Methods
 
     /**
      * Returns attribute tox
@@ -52,7 +64,7 @@ public class Cleaning extends Product {
     /**
      * Sets attribute tox
      *
-     * @param tox
+     * @param tox product toxicity
      */
     public void setTox(int tox) {
         this.tox = tox;
