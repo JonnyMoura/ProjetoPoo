@@ -1,11 +1,12 @@
 package com.company;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Class Sales represents every sale made by the store(a purchase by the customer), it has direct interaction with class Client, since
  */
-public class Sales {
+public class Sales implements Serializable {
     private ArrayList<Product> p;
     private double salePrice;
     private Client client;
