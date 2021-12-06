@@ -28,7 +28,6 @@ public class Data implements Serializable {
             this.day = day;
             this.month = month;
             this.year = year;
-        } else {
         }
     }
 

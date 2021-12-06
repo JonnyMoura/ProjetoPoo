@@ -42,17 +42,17 @@ public class Manager {
         File fp = new File(fproducs);
         File fpro = new File(fpromotions);
         if (fc.exists() && fp.exists() && fpro.exists()) {
-            c = readClients(fc);
-            p = readProducs(fp);
-            pro = readPromotion(fpro);
+            readObj(fc);
+            readObj(fp);
+            readObj(fpro);
 
         } else {
             readFile("clients.txt");
             readFile("promotion.txt");
             readFile("producs.txt");
-            writePromotions(pro, fpro);
-            writeClients(c, fc);
-            writeProducs(p, fp);
+            writeObj(fpro);
+            writeObj(fc);
+            writeObj(fp);
         }
     }
 
@@ -129,10 +129,18 @@ public class Manager {
         }
     }
 
-    public void writeProducs(ArrayList<Product> produtos, File ficheiro) {
+    public void writeObj(File ficheiro) {
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ficheiro));
-            oos.writeObject(produtos);
+            if (ficheiro.getName().equals("clients.obj")){
+                oos.writeObject(c);
+            }
+            else if (ficheiro.getName().equals("promotions.obj")){
+                oos.writeObject(pro);
+            }
+            else {
+                oos.writeObject(p);
+            }
             oos.close();
         } catch (FileNotFoundException ex) {
             System.out.println("Erro ao ler ou criar ficheiro ");
@@ -141,51 +149,19 @@ public class Manager {
         }
     }
 
-    public void writePromotions(ArrayList<Promotion> promotions, File fich) {
-        try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fich));
-            oos.writeObject(promotions);
-            oos.close();
-        } catch (FileNotFoundException ex) {
-            System.out.println("Erro ao ler ou criar ficheiro ");
-        } catch (IOException ex) {
-            System.out.println("Erro ao gravar o objeto no ficheiro");
-        }
-    }
 
-    public void writeClients(ArrayList<Client> clients, File fich) {
-        try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fich));
-            oos.writeObject(clients);
-            oos.close();
-        } catch (FileNotFoundException ex) {
-            System.out.println("Erro ao ler ou criar ficheiro ");
-        } catch (IOException ex) {
-            System.out.println("Erro ao gravar o objeto no ficheiro");
-        }
-    }
-
-    public ArrayList<Product> readProducs(File ficheiro) {
-        ArrayList<Product> produtos = new ArrayList<>();
-        try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ficheiro));
-            produtos = (ArrayList<Product>) ois.readObject();
-            ois.close();
-        } catch (FileNotFoundException ex) {
-            System.out.println("Erro a abrir ficheiro.");
-        } catch (IOException ex) {
-            System.out.println("Erro a ler ficheiro.");
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Erro a converter objeto.");
-        }
-        return produtos;
-    }
-
-    public ArrayList<Promotion> readPromotion(File fich) {
-        ArrayList<Promotion> promotions = new ArrayList<>();
+    public void readObj(File fich) {
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fich));
-            promotions = (ArrayList<Promotion>) ois.readObject();
+            if (fich.getName().equals("clients.obj")){
+                c = (ArrayList<Client>) ois.readObject();
+            }
+            else if (fich.getName().equals("promotions.obj")){
+                pro = (ArrayList<Promotion>) ois.readObject();
+            }
+            else {
+                p = (ArrayList<Product>) ois.readObject();
+            }
             ois.close();
         } catch (FileNotFoundException ex) {
             System.out.println("Erro a abrir ficheiro.");
@@ -194,23 +170,6 @@ public class Manager {
         } catch (ClassNotFoundException ex) {
             System.out.println("Erro a converter objeto.");
         }
-        return promotions;
-    }
-
-    public ArrayList<Client> readClients(File fich) {
-        ArrayList<Client> clients = new ArrayList<>();
-        try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fich));
-            clients = (ArrayList<Client>) ois.readObject();
-            ois.close();
-        } catch (FileNotFoundException ex) {
-            System.out.println("Erro a abrir ficheiro.");
-        } catch (IOException ex) {
-            System.out.println("Erro a ler ficheiro.");
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Erro a converter objeto.");
-        }
-        return clients;
     }
 
 
@@ -324,7 +283,6 @@ public class Manager {
         System.out.println(s);
         return s;
 
-
     }
 
 
@@ -400,8 +358,8 @@ public class Manager {
 
             }
         } while (n == 1 || n == 2 || n == 3);
-        writeClients(c, new File("clients.obj"));
-        writeProducs(p, new File("producs.obj"));
+        writeObj( new File("clients.obj"));
+        writeObj( new File("producs.obj"));
         System.exit(0);
     }
 }
