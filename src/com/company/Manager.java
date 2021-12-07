@@ -4,80 +4,127 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class Manager. It interacts directly with class Client, Product and Promotion managing interactions among them. It also handles operation with loading and writing on the database text and object files that contain information about available products,clients and promotions.
+ * Manages three operations available to users: login, to make a new purchase and how to consult made purchases.
+ * It has 3 attributes: ArrayList <Product> p(manages every product available on the store), ArrayList <Client> c(manages every client registered on the store) and ArrayList<Promotion> prom(every promotion the store offers).
+ * Methods: loadData(String fClients, String fProducts, String fPromotions); readFile(String file); writeObj(File file); readObj(File file); login(); verifyData(Data dtSale, Data dtComp); salePrice(ArrayList<Product> products, Data d); buy(Client b, Data d);
+ * consultSales(Client c); changeDate(); menu()
+ */
 public class Manager {
+    //Attributes
     private ArrayList<Product> p;
     private ArrayList<Client> c;
     private ArrayList<Promotion> pro;
 
-    public static void main(String[] args) {
-        Manager m = new Manager();
-        m.loadData("clients.obj", "producs.obj", "promotions.obj");
-        m.menu();
-    }
 
+//Constructors
+
+    /**
+     * Generates a new Manager object.
+     */
     public Manager() {
         p = new ArrayList<>();
         c = new ArrayList<>();
         pro = new ArrayList<>();
     }
+//Methods
 
+    /**
+     * Main method, runs program application code
+     */
+    public static void main(String[] args) {
+        Manager m = new Manager();
+        m.loadData("Clients.obj", "Products.obj", "Promotions.obj");
+        m.menu();
+    }
+
+    /**
+     * Returns attribute p
+     *
+     * @return p
+     */
     public ArrayList<Product> getP() {
         return p;
     }
 
+    /**
+     * Sets attribute p
+     *
+     * @param p products available on store ArrayList
+     */
     public void setP(ArrayList<Product> p) {
         this.p = p;
     }
 
+    /**
+     * Returns attribute c
+     *
+     * @return c
+     */
     public ArrayList<Client> getC() {
         return c;
     }
 
+    /**
+     * Sets attribute c
+     *
+     * @param c clients registered on store ArrayList
+     */
     public void setC(ArrayList<Client> c) {
         this.c = c;
     }
 
-    public void loadData(String fclients, String fproducs, String fpromotions) {
-        File fc = new File(fclients);
-        File fp = new File(fproducs);
-        File fpro = new File(fpromotions);
-        if (fc.exists() && fp.exists() && fpro.exists()) {
-            readObj(fc);
-            readObj(fp);
-            readObj(fpro);
+    /**
+     * Loads data into program from text files or object files. If it's the first time running the program it will load the needed data from the text files into matching ArrayList. Every other time loads from object file.
+     *
+     * @param fClients    name of the client object file
+     * @param fProducts   name of the product object file
+     * @param fPromotions name of the Promotions object file
+     */
+    public void loadData(String fClients, String fProducts, String fPromotions) {
+        File fC = new File(fClients);
+        File fP = new File(fProducts);
+        File fPro = new File(fPromotions);
+        if (fC.exists() && fP.exists() && fPro.exists()) {///checks if object files were already created
+            readObj(fC);
+            readObj(fP);
+            readObj(fPro);
 
-        } else {
-            readFile("clients.txt");
-            readFile("promotion.txt");
-            readFile("producs.txt");
-            writeObj(fpro);
-            writeObj(fc);
-            writeObj(fp);
+        } else {///reads from text files
+            readFile("Clients.txt");
+            readFile("Promotions.txt");
+            readFile("Products.txt");
         }
     }
 
-    public void readFile(String file) {
+    /**
+     * Reads text files and loads data into matching ArrayList
+     *
+     * @param file name of the text file to be read
+     */
+    private void readFile(String file) {
         File f = new File(file);
-        if (f.exists() && f.isFile()) {
+        if (f.exists() && f.isFile()) {// checks if file exists
             try {
                 FileReader fr = new FileReader(f);
                 BufferedReader br = new BufferedReader(fr);
                 String[] split;
                 String line;
-                while ((line = br.readLine()) != null) {
+                while ((line = br.readLine()) != null) { // while there's still lines to read
                     split = line.split(";");
-                    if (split[0].equals("Client")) {
+                    if (split[0].equals("Client")) {// if the first string is 'client' it means it´s reading client info from text file
                         String[] splitdata = split[4].split("/");
                         Data d = new Data(Integer.parseInt(splitdata[0]), Integer.parseInt(splitdata[1]), Integer.parseInt(splitdata[2]));
                         Client cl = new Client(split[1], split[2], split[3], d, Boolean.parseBoolean(split[5]));
                         c.add(cl);
-                    } else if (split[0].equals("Promotion")) {
-                        String[] splitdata;
+                    } else if (split[0].equals("Promotion")) {// if the first string is 'Promotion' it means it´s reading promotion info from text file
+                        String[] splitdata; //promotion date
                         splitdata = split[2].split("/");
                         Data d1 = new Data(Integer.parseInt(splitdata[0]), Integer.parseInt(splitdata[1]), Integer.parseInt(splitdata[2]));
                         splitdata = split[3].split("/");
                         Data d2 = new Data(Integer.parseInt(splitdata[0]), Integer.parseInt(splitdata[1]), Integer.parseInt(splitdata[2]));
-                        if (split[1].equals("PayLess")) {
+                        if (split[1].equals("PayLess")) { //if the second string is "PayLess" it means the Promotion PayLess
                             PayLess pl = new PayLess(d1, d2);
                             pro.add(pl);
                         } else {
@@ -85,7 +132,7 @@ public class Manager {
                             pro.add(ttf);
                         }
                     } else {
-                        if (split[1].equals("Food")) {
+                        if (split[1].equals("Food")) {// if the first string is 'Food' it means it´s reading Product(subtype Food) info from text file
                             Food fd;
                             if (!(split[6].equals(""))) {
                                 fd = new Food(Integer.parseInt(split[2]), split[3], Double.parseDouble(split[4]), Integer.parseInt(split[5]),
@@ -95,7 +142,7 @@ public class Manager {
                                         Double.parseDouble(split[7]), Double.parseDouble(split[8]));
                             }
                             p.add(fd);
-                        } else if (split[1].equals("Cleaning")) {
+                        } else if (split[1].equals("Cleaning")) {// if the first string is 'Cleaning' it means it´s reading Product(subtype Cleaning) info from text file
                             Cleaning cl;
                             if (!(split[6].equals(""))) {
                                 cl = new Cleaning(Integer.parseInt(split[2]), split[3], Double.parseDouble(split[4]), Integer.parseInt(split[5]),
@@ -105,14 +152,14 @@ public class Manager {
                                         Integer.parseInt(split[7]));
                             }
                             p.add(cl);
-                        } else {
+                        } else {// It´s reading Furniture type Product from text file
                             Furniture fur;
                             if (!(split[6].equals(""))) {
                                 fur = new Furniture(Integer.parseInt(split[2]), split[3], Double.parseDouble(split[4]), Integer.parseInt(split[5]),
-                                        pro.get(Integer.parseInt(split[6])), Double.parseDouble(split[7]), split[8]);
+                                        pro.get(Integer.parseInt(split[6])), Double.parseDouble(split[7]), split[8]);// Promotion parameter
                             } else {
                                 fur = new Furniture(Integer.parseInt(split[2]), split[3], Double.parseDouble(split[4]), Integer.parseInt(split[5]),
-                                        Double.parseDouble(split[7]), split[8]);
+                                        Double.parseDouble(split[7]), split[8]);// without promotion parameter
                             }
                             p.add(fur);
                         }
@@ -120,105 +167,173 @@ public class Manager {
                 }
                 br.close();
             } catch (FileNotFoundException ex) {
-                System.out.println("Erro a abrir ficheiro de texto.");
+                System.out.println("Error opening text file.");
             } catch (IOException ex) {
-                System.out.println("Erro a ler ficheiro de texto.");
+                System.out.println("Error reading text file.");
             }
         } else {
-            System.out.println("Ficheiro não existe.");
+            System.out.println("File doesn't exist.");
         }
     }
 
-    public void writeObj(File ficheiro) {
+    /**
+     * Writes from ArrayLists into object files
+     *
+     * @param file file in which objects will be written
+     */
+    private void writeObj(File file) {
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ficheiro));
-            if (ficheiro.getName().equals("clients.obj")){
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
+            if (file.getName().equals("Clients.obj")) {
                 oos.writeObject(c);
-            }
-            else if (ficheiro.getName().equals("promotions.obj")){
+            } else if (file.getName().equals("Promotions.obj")) {
                 oos.writeObject(pro);
-            }
-            else {
+            } else {
                 oos.writeObject(p);
             }
             oos.close();
         } catch (FileNotFoundException ex) {
-            System.out.println("Erro ao ler ou criar ficheiro ");
+            System.out.println("File not found!");
         } catch (IOException ex) {
-            System.out.println("Erro ao gravar o objeto no ficheiro");
+            System.out.println("Error writing into file!");
         }
     }
 
-
-    public void readObj(File fich) {
+    /**
+     * Reads an object file and loads into ArrayLists
+     *
+     * @param file object file to be read
+     */
+    private void readObj(File file) {
         try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fich));
-            if (fich.getName().equals("clients.obj")){
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+            ///loads each file into matching ArrayList
+            if (file.getName().equals("Clients.obj")) {
                 c = (ArrayList<Client>) ois.readObject();
-            }
-            else if (fich.getName().equals("promotions.obj")){
+            } else if (file.getName().equals("Promotions.obj")) {
                 pro = (ArrayList<Promotion>) ois.readObject();
-            }
-            else {
+            } else {
                 p = (ArrayList<Product>) ois.readObject();
             }
             ois.close();
         } catch (FileNotFoundException ex) {
-            System.out.println("Erro a abrir ficheiro.");
+            System.out.println("Error opening file!");
         } catch (IOException ex) {
-            System.out.println("Erro a ler ficheiro.");
+            System.out.println("Error reading file!");
         } catch (ClassNotFoundException ex) {
-            System.out.println("Erro a converter objeto.");
+            System.out.println("Error converting file!");
         }
     }
 
+    /**
+     * Allows new users to signup
+     *
+     * @return new client who has signed up
+     */
+    private Client signUp() {
+        System.out.println("Insert your name:");
+        Scanner sc = new Scanner(System.in);
+        String name = sc.nextLine();
+        System.out.println("Insert your address:");
+        Scanner nc = new Scanner(System.in);
+        String address = nc.nextLine();
+        System.out.println("Insert your email");
+        Scanner mc = new Scanner(System.in);
+        String email = mc.nextLine();
+        System.out.println("Insert your birthDate");
+        Data d = changeDate();
+        return new Client(name, address, email, d, false);
 
-    public Client login() {
+
+    }
+
+    /**
+     * Enables user to login. User has to input email to check if user is on the ArrayList of registered users.
+     *
+     * @return client that has logged in
+     */
+    private Client login() {
         System.out.print("Insert email :");
         Scanner sc = new Scanner(System.in);
         String em = sc.nextLine();
         for (Client i : c) {
-            if ((i.getEmail()).equals(em)) {
+            if ((i.getEmail()).equals(em)) {///Check if user is already registered
                 System.out.println("Success!You have logged in\n");
                 return i;
             }
         }
         System.out.println("Email not found");
-        return login();
+        System.out.println("Insert 1 if you wish to signup or any number to insert a different email!");
+        int n;
+        Scanner nc = new Scanner(System.in);
+        while (!nc.hasNextInt()) {//checks if the input is an integer
+            System.out.println("Invalid data\nInsert number");
+            nc.next();
+        }
+        n = nc.nextInt();
+        if (n == 1) {
+            Client b = signUp();
+            c.add(b);///adds new client to store
+            return b;
+
+        } else {
+
+            return login();
+        }
     }
 
-
-    public boolean verifyData(Data dtsale, Data dtcomp) {
-        if (dtsale.getYear() < dtcomp.getYear()) {
+    /**
+     * Verifies if a first date argument is before the second one one
+     *
+     * @param dtSale first argument
+     * @param dtComp second argument
+     * @return true if first date<=second date
+     */
+    private boolean verifyData(Data dtSale, Data dtComp) {
+        if (dtSale.getYear() < dtComp.getYear()) {
             return true;
-        } else if (dtsale.getYear() == dtcomp.getYear() && dtsale.getMonth() < dtcomp.getMonth()) {
+        } else if (dtSale.getYear() == dtComp.getYear() && dtSale.getMonth() < dtComp.getMonth()) {
             return true;
         } else {
-            return (dtsale.getYear() == dtcomp.getYear() && dtsale.getMonth() == dtcomp.getMonth() && dtsale.getDay() <= dtcomp.getDay());
+            return (dtSale.getYear() == dtComp.getYear() && dtSale.getMonth() == dtComp.getMonth() && dtSale.getDay() <= dtComp.getDay());
         }
     }
 
-    public double saleprice(ArrayList<Product> products, Data d) {
-        double salepriceaux = 0;
+    /**
+     * Calculates the price of a sale cart(products bought)
+     *
+     * @param products products bought
+     * @param d        date of the sale
+     * @return double sale price
+     */
+    private double salePrice(ArrayList<Product> products, Data d) {
+        double salePriceAux = 0;
         for (Product prod : products) {
-            if (prod.getProm() == null) {
-                salepriceaux += prod.getUnitPrice() * prod.getStock();
+            if (prod.getProm() == null) {// when there is no promotion to given product
+                salePriceAux += prod.getUnitPrice() * prod.getStock();//price of each unit x units bought
             } else {
-                if (!verifyData(d, prod.getProm().getStartDate()) && verifyData(d, prod.getProm().getFinalDate())) {
-                    salepriceaux += prod.getProm().calculateDiscount(prod.getUnitPrice(), prod.getStock());
-                } else salepriceaux += prod.getUnitPrice() * prod.getStock();
+                if (!verifyData(d, prod.getProm().getStartDate()) && verifyData(d, prod.getProm().getFinalDate())) {//if there is promotions checks if promotions is still on
+                    salePriceAux += prod.getProm().calculateDiscount(prod.getUnitPrice(), prod.getStock());
+                } else salePriceAux += prod.getUnitPrice() * prod.getStock();
             }
         }
-        return salepriceaux;
+        return salePriceAux;
     }
 
-    public Sales buy(Client b, Data d) {
-        ArrayList<Product> prod = new ArrayList<>();
+    /**
+     * Makes a new purchase for the new customer
+     *
+     * @param b customer who made the purchase
+     * @param d date of the purchase
+     * @return new Sale made by customer
+     */
+    private Sales buy(Client b, Data d) {
+        ArrayList<Product> prod = new ArrayList<>();//temporary cart
         int option;
         do {
             System.out.println("Available products:");
             System.out.println("==================================================");
-            for (Product i : p) {
+            for (Product i : p) {///prints available products
                 System.out.println(i);
             }
             System.out.println("===================================================");
@@ -240,18 +355,18 @@ public class Manager {
             } while (units <= 0);
             int aux = 0;
             for (Product i : p) {
-                if ((i.getName().equalsIgnoreCase(pr)) && i.getStock() > 0 && i.getStock() >= units) {
+                if ((i.getName().equalsIgnoreCase(pr)) && i.getStock() > 0 && i.getStock() >= units) {///checks if products exists has available stock
                     aux += 1;
                     System.out.println("Succesfully added to the cart! ");
-                    i.setStock(i.getStock() - units);
+                    i.setStock(i.getStock() - units);//changes stock in store(Total units- units bought)
                     Product cpy = i.copy();
-                    cpy.setStock(units);
+                    cpy.setStock(units);//copy of bought product with changed stock number(units bought by customer)
                     prod.add(cpy);
 
 
                 }
             }
-            if (aux == 1) {
+            if (aux == 1) {/// if the product was bought and already was in the cart it updates units bought
                 for (Product j : prod) {
                     if (pr.equals(j.getName())) {
                         j.setStock(units);
@@ -259,7 +374,6 @@ public class Manager {
                 }
             } else {
                 System.out.println("Product not available or out of stock!");
-
 
             }
             System.out.println("Your cart until this moment:");
@@ -278,20 +392,29 @@ public class Manager {
 
         } while (option != -1);
         System.out.println(prod);
-        Sales s = new Sales(prod, saleprice(prod, d), b, d);
+        Sales s = new Sales(prod, salePrice(prod, d), b, d);///finished shopping makes new sale
         System.out.println("Your purchase:\n");
         System.out.println(s);
         return s;
 
     }
 
-
-    public void consultSales(Client c) {
+    /**
+     * Prints every purchase made
+     *
+     * @param c client to check Purchases
+     */
+    private void consultSales(Client c) {
         for (Sales s : c.getS()) {
             System.out.println(s);
         }
     }
 
+    /**
+     * Changes date
+     *
+     * @return new Date
+     */
     private Data changeDate() {
         System.out.println("Insert day:");
 
@@ -324,10 +447,13 @@ public class Manager {
         return new Data(day, month, year);
     }
 
-
+    /**
+     * Manages user interaction. It manages three different options: make login, consult purchases and change current date.
+     */
     public void menu() {
         Data d = changeDate();
         Client b = login();
+        System.out.println(c);
         int n;
 
         do {
@@ -347,19 +473,20 @@ public class Manager {
 
             switch (n) {
                 case 1 -> {
-                    Sales m = buy(b, d);
+                    Sales m = buy(b, d);///Makes a new purchase
                     b.addS(m);
 
                 }
 
-                case 2 -> consultSales(b);
-                case 3 -> d = changeDate();
+                case 2 -> consultSales(b); //Makes consults purchases
+                case 3 -> d = changeDate(); //Changes currrent date
 
 
             }
         } while (n == 1 || n == 2 || n == 3);
-        writeObj( new File("clients.obj"));
-        writeObj( new File("producs.obj"));
+        writeObj(new File("Clients.obj"));
+        writeObj(new File("Products.obj"));
+        writeObj(new File("Promotions.obj"));
         System.exit(0);
     }
 }

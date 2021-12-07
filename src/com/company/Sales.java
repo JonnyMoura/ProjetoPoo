@@ -142,10 +142,10 @@ public class Sales implements Serializable {
     public String toString() {
         return "Sale:\n" +
                 "Products purchased=" + p + "\n" +
-                "salePrice-->" + salePrice + "\n" +
-                "transportcost -->" + transportCost() + "\n" +
+                "Sale Price-->" + salePrice + "\n" +
+                "Transport Cost -->" + transportCost() + "\n" +
                 "Client=" + client.getName() + "\n" +
-                "saledate=" + saleDate + "\n";
+                "sale Date=" + saleDate + "\n";
     }
 
 }
