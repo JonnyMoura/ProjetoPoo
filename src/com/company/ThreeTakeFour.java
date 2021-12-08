@@ -20,7 +20,7 @@ public class ThreeTakeFour extends Promotion {
 
 //Methods
     public double calculateDiscount(double unitPrice, int count) {
-        return unitPrice * (double) (count - count / 4); /// it pays only three for every 4 products bought. integer count
+        return unitPrice * (double) (count - count / 4); /// it pays only three for every 4 products bought. integer count-counts units bought
     }
 
     @Override
