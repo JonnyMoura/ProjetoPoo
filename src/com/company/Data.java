@@ -110,6 +110,12 @@ public class Data implements Serializable {
         } else if ((month == 4 || month == 6 || month == 9 || month == 11) && (day <= 0 || day > 30)) {
             System.out.println("Error! Invalid date");
             return 0;
+        } else if (month > 12 || month <= 0) {
+            System.out.println("Error! Invalid date");
+            return 0;
+        } else if (year <= 0) {
+            System.out.println("Error! Invalid date");
+            return 0;
         }
         return 1;
     }

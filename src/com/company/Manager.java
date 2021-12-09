@@ -443,7 +443,10 @@ public class Manager {
             yc.next();
         }
         int year = yc.nextInt();
-
+        Data d = new Data(day, month, year);
+        if (d.getYear() == 0 || d.getMonth() == 0 || d.getDay() == 0) {
+            return changeDate();
+        }
         return new Data(day, month, year);
     }
 
