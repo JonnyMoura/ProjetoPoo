@@ -11,11 +11,11 @@ public abstract class Product implements Serializable {
 //Attributes
 
 
-    private int id;
-    private String name;
-    private double unitPrice;
-    private int stock;
-    private Promotion prom;
+    protected int id;
+    protected String name;
+    protected double unitPrice;
+    protected int stock;
+    protected Promotion prom;
 
 //Constructors
     /**

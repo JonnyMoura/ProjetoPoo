@@ -10,8 +10,8 @@ import java.io.Serializable;
  */
 public abstract class Promotion implements Serializable {
     //Attributes
-    private Data startDate;
-    private Data finalDate;
+    protected Data startDate;
+    protected Data finalDate;
 
 //Constructors
 
