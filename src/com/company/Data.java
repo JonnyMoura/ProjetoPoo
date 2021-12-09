@@ -126,10 +126,7 @@ public class Data implements Serializable {
      * Returns Data attributes as a String.
      */
     public String toString() {
-        return "Data{" +
-                "day=" + day +
-                ", month=" + month +
-                ", year=" + year +
-                '}';
+        return day + "/" + month +
+                "/" + year;
     }
 }

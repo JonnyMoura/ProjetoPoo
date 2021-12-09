@@ -75,7 +75,7 @@ public class Cleaning extends Product {
      * Returns Cleaning attributes as a String.
      */
     public String toString() {
-        return "Cleaning product---->" +
+        return "Cleaning Product---->" +
                 super.toString() +
                 ", tox=" + tox;
     }

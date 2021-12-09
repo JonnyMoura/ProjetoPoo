@@ -141,7 +141,7 @@ public class Sales implements Serializable {
      */
     public String toString() {
         return "Sale:\n" +
-                "Products purchased=" + p + "\n" +
+                "Products Purchased=" + p + "\n" +
                 "Sale Price-->" + salePrice + "\n" +
                 "Transport Cost -->" + transportCost() + "\n" +
                 "Client=" + client.getName() + "\n" +
