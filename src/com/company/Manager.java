@@ -453,7 +453,6 @@ public class Manager {
     public void menu() {
         Data d = changeDate();
         Client b = login();
-        System.out.println(c);
         int n;
 
         do {
